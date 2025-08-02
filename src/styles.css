@@ -1,1 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    background-color: #5A9430;
+    min-height: 99vh;
+}
+
+/* Tipografia */
+
+.istok-web-regular {
+    font-family: "Istok Web", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .istok-web-bold {
+    font-family: "Istok Web", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  /* Colores */
+:root{
+    --color-buton: #5A9430; 
+    --main-font: "Istok Web", sans-serif; 
+    --logo-font: "Philosopher", sans-serif;
+}
+
+.buttones {
+  background-color: #F6F7F1;
+  font-family: var(--main-font);
+  font-weight: 700;
+  color: var(--color-buton);
+  border: none;
+  width: max-content;
+  padding: 5px 8px;
+}
+
+.buttones:hover {
+  background-color: #5A9430;
+  color: #F6F7F1;
+  cursor: pointer;
+  border-style: solid;
+  transition: 200ms;
+}
+
+  

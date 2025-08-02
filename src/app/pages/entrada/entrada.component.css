@@ -1,0 +1,24 @@
+.entrada {
+    padding: 30px 60px;
+    display: flex;
+    flex-direction: column;    
+    justify-items: center;
+    color: white
+}
+
+h1 {
+    font-family: var(--main-font);
+    font-weight: 700;
+    font-size: 40px;
+
+}
+
+.name {
+    font-family: var(--logo-font);
+    font-weight: 400;
+}
+
+h4 {
+    font-family: var(--main-font);
+    font-weight: 400;
+}
