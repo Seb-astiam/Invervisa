@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;    
     justify-items: center;
+    align-items: center;
     color: white
 }
 
@@ -16,9 +17,21 @@ h1 {
 .name {
     font-family: var(--logo-font);
     font-weight: 400;
+    font-size: 60px;
+    
 }
 
 h4 {
     font-family: var(--main-font);
     font-weight: 400;
+    text-align: center;
+}
+
+.container-icon {
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    height: 100px;
 }

@@ -1,0 +1,29 @@
+@if(loading){ <h3>Cargando...</h3> }
+@for (o of orders; track o.id) {
+<article class="card">
+    <header class="row">
+        <div>#{{ o.id }}</div>
+        <div>Usuario: {{ o.userId }}</div>
+        <div>Total: ${{ o.totalPrice }}</div>
+        <div>{{ o.createdAt | date:'short' }}</div>
+    </header>
+
+    <section class="row">
+        <div>
+            <label>Estado</label>
+            <select [(ngModel)]="o.status" (change)="update(o)">
+                @for (s of statusses; track s) {
+                <option [value]="s">{{ s }}</option>
+                }
+            </select>
+        </div>
+
+        @if (o.address) {
+        <div>
+            Envío: {{ o.address.street }}, {{ o.address.city }}
+        </div>
+        }
+
+    </section>
+</article>
+}

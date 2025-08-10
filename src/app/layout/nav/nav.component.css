@@ -1,0 +1,56 @@
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.links, .auth {
+  display:flex; 
+  gap:.75rem; 
+}
+
+a {
+  position: relative;
+  text-decoration: none;
+  color: var(--color-buton); 
+  font-family: var(--main-font);
+  font-weight: 700;
+}
+
+a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: var(--color-buton);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+
+a:hover::after {
+  transform: scaleX(1);
+}
+
+a:hover {
+    color: black;
+}
+
+button {
+  cursor: pointer;
+}
+
+.user { 
+  opacity:.8; 
+  font-family: var(--main-font);
+  color: var(--color-buton);
+  font-weight: 700;
+}
+
+
+
+
+

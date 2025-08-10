@@ -1,0 +1,9 @@
+<h1> Productos </h1>
+@if (loading || products.length === 0) { <h1 class="loading"> Cargando... </h1> }
+@for (p of products; track p.id) {
+<div class="card">
+    <a [routerLink]="['/products', p.id]">{{ p.name }}</a>
+    <div>\${{ p.price }}</div>
+     <button (click)="addToCart(p)">Agregar al carrito</button>
+</div>
+}

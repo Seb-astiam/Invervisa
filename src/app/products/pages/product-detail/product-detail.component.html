@@ -1,0 +1,11 @@
+@if (loading) { <p>Cargando...</p> }
+@if (product) {
+<h2>{{ product.name }}</h2>
+<p>{{ product.description }}</p>
+<div>\${{ product.price }}</div>
+
+<label>Cantidad</label>
+<input type="number" [(ngModel)]="qty" min="1">
+
+<button (click)="addToCart()">Agregar al carrito</button>
+}

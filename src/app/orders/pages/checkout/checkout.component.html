@@ -1,0 +1,26 @@
+<h1>Checkout</h1>
+
+@if (loading) {
+    <h2>Cargando...</h2>
+}
+@if (!loading && addresses.length === 0) {
+    <h2>No tienes direcciones. <a routerLink="/addresses">Crear direcciones</a></h2>
+}
+
+@if (addresses.length) {
+    <label>Selecciona dirección de envio</label>
+    <select [(ngModel)]="selected">
+        @for (a of addresses; track a.id) {
+            <option [value]="a.id">
+                {{ a.street }}, {{ a.city }} ({{ a.isDefault ? 'Predeterminada' : '' }})
+            </option>
+        }
+    </select>
+
+    <div style="margin-bottom: 1rem">
+        <button (click)="confirm()" [disabled]="processing || !selected">Confirmar</button>
+        <a routerLink="/cart">Volver al carrito</a>
+    </div>
+
+    @if (msg) { <h3>{{ msg }}</h3>}
+}

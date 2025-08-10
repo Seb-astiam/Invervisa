@@ -1,0 +1,27 @@
+
+<nav class="nav">
+    <!-- <a routerLink="/" class="brand">Farmacia</a> -->
+    <div class="links">
+        <a routerLink="/productos">Productos</a>
+        <a routerLink="/cart">Carrito</a>
+        @if(isAuth()) {
+            <a routerLink="/orders">Mis pedidos</a>
+        }
+        @if(isAdmin()) {
+            <a routerLink="/admin">Admin</a>
+        }
+    </div>
+
+    <div class="auth">
+        @if(!isAuth()) {
+            <a routerLink="/auth/login">Entrar</a>
+            <a routerLink="/auth/register">Crear Cuenta</a>
+        } @else {
+            <span class="user">Hola, {{ user()?.name }}</span>
+            <button (click)="logout()">Salir</button>
+        }
+    </div>
+</nav>
+
+
+

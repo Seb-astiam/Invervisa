@@ -1,0 +1,20 @@
+<h1>Carrito</h1>
+
+@if (loading) { <p>Cargando...</p> }
+@if (!loading && items.length === 0) {
+    <p>Tu carrito esta vacio. <a routerLink="/productos">Ver productos</a></p>
+}
+
+@for (i of items; track i.id) {
+    <div class="row">
+        <div class="name">{{ i.product.name }}</div>
+        <div class="price">\{{ i.product.price }}</div>
+        <input type="number" min="1" [(ngModel)]="i.quantity" (change)="updateQty(i)" />
+        <button (click)="remove(i)">Quitar</button>
+    </div>
+}
+
+@if (items.length) {
+    <h3>Subtotal: ${{ subtotal() }}</h3>
+    <button (click)="goCheckout()">Comprar ahora</button>
+}

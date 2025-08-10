@@ -1,0 +1,74 @@
+src/
+├── app/
+│   ├── core/                      # Servicios base, interceptores, guards, auth global
+│   │   ├── services/
+│   │   ├── interceptors/
+│   │   ├── guards/
+│   │   ├── models/               # Interfaces/Types globales
+│   │   └── core.module.ts
+│   │
+│   ├── shared/                    # Componentes reutilizables (inputs, botones, etc.)
+│   │   ├── components/
+│   │   ├── directives/
+│   │   ├── pipes/
+│   │   └── shared.module.ts
+│   │
+│   ├── auth/                      # Login y registro
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── auth-routing.module.ts
+│   │
+│   ├── products/                  # Listado, detalle, creación de productos
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── products-routing.module.ts
+│   │
+│   ├── categories/                # CRUD de categorías
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── categories-routing.module.ts
+│   │
+│   ├── cart/                      # Carrito de compras
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── cart-routing.module.ts
+│   │
+│   ├── orders/                    # Historial de pedidos
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── orders-routing.module.ts
+│   │
+│   ├── addresses/                 # Direcciones del usuario
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── addresses-routing.module.ts
+│   │
+│   ├── admin/                     # Panel administrativo
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── admin-routing.module.ts
+│   │
+│   ├── layout/                    # Navegación, headers, footers
+│   │   ├── components/
+│   │   └── layout.module.ts
+│   │
+│   └── app-routing.module.ts      # Rutas principales
+│
+├── assets/
+├── environments/
+└── main.ts
+
+
+| Carpeta     | Propósito                                                                                             |
+| ----------- | ----------------------------------------------------------------------------------------------------- |
+| `core`      | Contiene lógica esencial y global, como servicios base, guards, interceptores de JWT, modelos         |
+| `shared`    | Contiene componentes reutilizables y sin lógica propia del negocio (ej. botón personalizado, spinner) |
+| `auth`      | Login, registro, almacenamiento de token, logout                                                      |
+| `products`  | Listado, detalle, creación, edición (se adapta según el rol: admin o cliente)                         |
+| `cart`      | Todo lo relacionado al carrito de compras                                                             |
+| `orders`    | Creación de órdenes desde carrito, historial del usuario, control admin                               |
+| `addresses` | Crear, actualizar y seleccionar direcciones para envío                                                |
+| `admin`     | Panel administrativo (gestión de productos, usuarios, pedidos)                                        |
+| `layout`    | Componentes visuales como navbar, sidebar, footer                                                     |
+| `models`    | Contiene las interfaces (DTOs, tokens, usuarios, etc.) replicando las del backend                     |
+
