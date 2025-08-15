@@ -31,7 +31,9 @@ export class NewProductComponent {
 
     ngOnInit() {
         this.categoriesApi.getAll().subscribe({
-            next: (res: any) => this.categories = [res],
+            next: (res: any) => {
+                this.categories = res
+            },
             error: (e) => console.error("Error cargando categorias", e),
         });
     }

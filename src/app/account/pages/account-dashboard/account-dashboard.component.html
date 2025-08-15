@@ -1,0 +1,18 @@
+<h1>Mi cuenta</h1>
+
+@if (loading) { <p>Cargando...</p> }
+@if (!loading && me) {
+  <section class="card">
+    <h3>Perfil</h3>
+    <p><strong>Nombre:</strong> {{ me.name }}</p>
+    <p><strong>Email:</strong> {{ me.email }}</p>
+    <p><strong>Rol:</strong> {{ me.role }}</p>
+    <a routerLink="/account/profile">Editar perfil</a>
+  </section>
+
+  <section class="grid">
+    <a class="card link" routerLink="/addresses">Direcciones</a>
+    <a class="card link" routerLink="/orders">Mis pedidos</a>
+    <a class="card link" routerLink="/account/security">Seguridad</a>
+  </section>
+}

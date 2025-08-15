@@ -1,5 +1,5 @@
 import { Component, inject } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute, Router, RouterLink } from "@angular/router";
 import { Product, ProductsService } from "../../services/products.service";
 import { CartService } from "../../../cart/services/cart.service";
 import { AuthService } from "../../../auth/services/auth.services";
@@ -8,13 +8,13 @@ import { FormsModule } from "@angular/forms";
 
 @Component({
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, RouterLink],
     templateUrl: './product-detail.component.html',
     styleUrl: './product-detail.component.css'
 })
 export class ProductDetailComponent {
     private route = inject(ActivatedRoute);
-    private api = inject(ProductsService);
+    api = inject(ProductsService);
     private cart = inject(CartService);
     private auth = inject(AuthService);
     private router = inject(Router);

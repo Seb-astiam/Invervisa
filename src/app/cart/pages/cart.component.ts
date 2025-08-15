@@ -3,6 +3,7 @@ import { Component, inject } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { CartItem, CartService } from "../services/cart.service";
+import { ProductsService } from "../../products/services/products.service";
 
 @Component({
     selector: 'app-cart',
@@ -12,6 +13,7 @@ import { CartItem, CartService } from "../services/cart.service";
 })
 export class CartComponent {
     private cart = inject(CartService);
+    product = inject(ProductsService)
     private router = inject(Router);
 
     items: CartItem[] = [];
@@ -30,14 +32,44 @@ export class CartComponent {
     }
 
     subtotal() {
-        return this.items.reduce((acc, it) => acc + Number(it.product.price) * it.quantity, 0)
+        return Math.round(
+          this.items.reduce((acc, it) => {
+            const unit = this.product.priceWithDiscount(Number(it.product.price), Number(it.product.discount ?? 0));
+            return acc + unit * it.quantity;
+          }, 0) * 100
+        ) / 100;
+      }
+
+    savingsOnProducts() {
+        return Math.round(
+            this.items.reduce((acc, it) => acc + this.lineSaving(it), 0) * 100
+        ) / 100;
+    }
+
+    private lineSaving(i: { product: { price: number; discount?: number }; quantity: number }) {
+        const price = Number(i.product.price ?? 0);
+        const discount = Number(i.product.discount ?? 0);
+        if (discount <= 0) return 0;
+        const perUnitSaving = price - this.product.priceWithDiscount(price, discount);
+        return Math.round(perUnitSaving * i.quantity * 100) / 100;
     }
 
     updateQty(i: CartItem) {
         this.cart.update(i.id, { quantity: Math.max(1, i.quantity) }).subscribe({
-            next: _ => {},
+            next: _ => { },
             error: e => alert('Error al actualizar: ' + (e?.error?.message || ''))
         });
+    }
+
+    increase(i: CartItem) {
+        i.quantity = i.quantity + 1;
+        this.updateQty(i);
+    }
+
+    decrease(i: CartItem) {
+        if (i.quantity === 1) return;
+        i.quantity = Math.max(1, i.quantity - 1);
+        this.updateQty(i);
     }
 
     remove(i: CartItem) {
@@ -49,5 +81,12 @@ export class CartComponent {
 
     goCheckout() {
         this.router.navigate(['/orders/checkout']);
+    }
+
+    cleanCart() {
+        this.cart.clear().subscribe({
+            next: () => { alert("Carrito vaciado"); this.loading = false; this.items = [] },
+            error: () => { this.loading = true }
+        })
     }
 }

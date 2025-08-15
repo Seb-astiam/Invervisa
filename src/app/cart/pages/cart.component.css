@@ -1,0 +1,93 @@
+.container-t {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--main-font);
+    color: var(--color-text);
+    padding: 0px 10px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.clean {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.clean:hover {
+    color: black;
+    transition: 300ms;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr; 
+    grid-column-gap: 20px;
+    padding: 10px;
+}
+
+.border {
+    border: 1px solid gainsboro;
+}
+
+.row {
+    display: flex;
+    width: 100%;
+    height: 100px;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: white;
+    font-family: var(--main-font);
+    position: relative; 
+    border-bottom: 0.1px solid gainsboro
+}
+
+.resume {
+    font-family: var(--main-font);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 95%;
+    width: 80%;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    /* border-radius: 10px; */
+    border: 1px solid gainsboro;
+}
+
+.qty-input {
+    width: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.qty-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+} 
+
+.remove {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+}
+
+.discount{
+    text-decoration: line-through;
+    color: gray;
+}
+
+.priceWithD {
+    color: var(--color-buton);
+}
+

@@ -1,0 +1,64 @@
+<h1>Mis Direcciones</h1>
+
+<section class="grid">
+    <form [formGroup]="form" (ngSubmit)="save()" class="card">
+        <h3>Nueva Dirección</h3>
+
+        <label>Calle | Dirección</label>
+        <input formControlName="street" placeholder="Cra 10 # 20-30" />
+        @if (form.controls.street.invalid && form.controls.street.touched) {
+            <small class="error">Requerido</small>
+        }
+
+        <label>Ciudad</label>
+        <input formControlName="city" placeholder="Barranquilla" />
+        @if (form.controls.city.invalid && form.controls.city.touched) {
+          <small class="error">Requerido</small>
+        }
+
+        <label>Departamento / Estado</label>
+        <input formControlName="state" placeholder="Atlantico" />
+        @if (form.controls.state.invalid && form.controls.state.touched) {
+          <small class="error">Requerido</small>
+        }
+
+        <label>Código Postal</label>
+        <input formControlName="zipCode" placeholder="110111" />
+        @if (form.controls.zipCode.invalid && form.controls.zipCode.touched) {
+          <small class="error">Requerido</small>
+        }
+
+        <label class="row">
+            <input type="checkbox" formControlName="isDefault" />
+            <span>Marcar como predeterminada</span>
+        </label>
+
+        <button type="submit" [disabled]="form.invalid || loading">
+            {{ loading ? 'Guardando...' : 'Guardar dirección' }}
+        </button>
+
+        @if (msg) { <p class="msg">{{ msg }}</p> }
+    </form>
+
+    <div class="card">
+        <h3>Direcciones guardadas</h3>
+        @if (loadingList) { <p>Cargando...</p> }
+        @if (!loadingList && !addresses.length) { <p>No tienes direcciones aún.</p> }
+
+        @for (a of addresses; track a.id) {
+            <div class="item">
+              <div class="txt">
+                <strong>{{ a.street }}</strong>
+                <div>{{ a.city }}, {{ a.state }} ({{ a.zipCode }})</div>
+                @if (a.isDefault) { <small class="tag">Predeterminada</small> }
+              </div>
+              <div class="actions">
+                <button (click)="setDefault(a)" [disabled]="a.isDefault || busyId===a.id">
+                  Predeterminar
+                </button>
+                <button (click)="remove(a)" [disabled]="busyId===a.id">Eliminar</button>
+              </div>
+            </div>
+          }
+    </div>
+</section>

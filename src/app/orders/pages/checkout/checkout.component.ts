@@ -35,10 +35,10 @@ export class CheckoutComponent {
         });
     }
 
-    confirm() {
+    confirm() { 
         if(!this.selected) return;
         this.processing = true;
-        this.ordersApi.createFormCart(this.selected).subscribe({
+        this.ordersApi.createFromCart(this.selected).subscribe({
             next: () => {
                 this.msg = 'Orden creada con exito';
                 this.processing = false;

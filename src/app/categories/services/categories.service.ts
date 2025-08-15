@@ -19,7 +19,7 @@ export class CategoryService {
     private http = inject(HttpClient);
 
     getAll() {
-        return this.http.get(this.API);
+        return this.http.get<Category[]>(this.API) ;
     }
 
     create(dto: CreateCategory) {

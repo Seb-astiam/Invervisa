@@ -3,7 +3,7 @@
 .layout {
     display: flex;
     flex-direction: column;
-    background-color: #5A9430;
+    background-color: white;
     min-height: max-content;
 }
 
@@ -23,7 +23,8 @@
 
   /* Colores */
 :root{
-    --color-buton: #5A9430; 
+    --color-buton: #758F31; 
+    --color-text: #758F31;
     --main-font: "Istok Web", sans-serif; 
     --logo-font: "Philosopher", sans-serif;
 }
@@ -39,12 +40,9 @@
 }
 
 .buttones:hover {
-  background-color: #5A9430;
+  background-color: #758F31;
   color: #F6F7F1;
   cursor: pointer;
-  border-style: solid;
-  outline: 2px solid black;
-  outline-offset: -2px;
   transition: 200ms;
 }
 

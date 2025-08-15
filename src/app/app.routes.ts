@@ -24,11 +24,11 @@ export const routes: Routes = [
                 canActivate: [authGuard],
                 loadChildren: () => import('./cart/cart.routes').then(m => m.CART_ROUTES)
             },
-            // {
-            //     path: 'addresses',
-            //     canActivate: [authGuard],
-            //     loadChildren: () => import('./addresses/addresses.routes').then(m => m.ADDRESSES_ROUTES)
-            // },
+            {
+                path: 'addresses',
+                canActivate: [authGuard],
+                loadChildren: () => import('./addresses/addresses.routes').then(m => m.ADDRESSES_ROUTES)
+            },
             {
                 path: 'orders',
                 canActivate: [authGuard],
@@ -38,7 +38,12 @@ export const routes: Routes = [
                 path: 'admin',
                 canActivate: [authGuard, adminGuard],
                 loadChildren: () => import('./admin/admin.routes').then(m => m.ADMIN_ROUTES)
-            }
+            },
+            {
+                path: 'account',
+                canActivate: [authGuard],
+                loadChildren: () => import('./account/account.routes').then(m => m.ACCOUNT_ROUTES)
+              }
         ]
     },
     {

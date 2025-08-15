@@ -1,0 +1,16 @@
+<h1>Seguridad</h1>
+
+<form [formGroup]="form" (ngSubmit)="change()" class="card">
+    <label>Contraseña actual</label>
+    <input type="password" formControlName="currentPassword" />
+
+    <label>Nueva contraseña</label>
+    <input type="password" formControlName="newPassword" />
+
+    <button type="submit" [disabled]="form.invalid || saving">
+        {{ saving ? 'Guardando...' : 'Cambiar contraseña' }}
+    </button>
+    <a routerLink="/account">Volver</a>
+
+    @if (msg) { <p class="msg">{{ msg }}</p> }
+</form>

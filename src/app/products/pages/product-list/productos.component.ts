@@ -12,7 +12,7 @@ import { AuthService } from '../../../auth/services/auth.services';
   styleUrl: './productos.component.css'
 })
 export class ProductsComponent {
-  private api = inject(ProductsService);
+  api = inject(ProductsService);
   private cart = inject(CartService);
   private auth = inject(AuthService);
   private router = inject(Router);
@@ -27,6 +27,7 @@ export class ProductsComponent {
     });
   }
 
+ 
   addToCart(p: Product) {
     if(!this.auth.isAuthenticated()) { this.router.navigate(['/auth/login']); return}
     this.cart.add({ productId: p.id, quantity: 1}).subscribe({

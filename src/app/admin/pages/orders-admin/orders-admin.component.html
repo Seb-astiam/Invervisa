@@ -1,4 +1,4 @@
-@if(loading){ <h3>Cargando...</h3> }
+@if(loading || orders.length === 0){ <h3>Cargando...</h3> }
 @for (o of orders; track o.id) {
 <article class="card">
     <header class="row">

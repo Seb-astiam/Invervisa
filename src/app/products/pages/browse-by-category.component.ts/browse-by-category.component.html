@@ -1,0 +1,46 @@
+<h1 class="title">Categorías</h1>
+
+@if (loading()) { <p>Cargando...</p> }
+@if (!loading() && !categories().length) { <p>Sin categorías.</p> }
+
+@if (categories().length) {
+<div class="tabs">
+    @for (c of categories(); track c.id) {
+    <a (click)="scrollTo(c.id)">{{ c.name }}</a>
+    }
+</div>
+}
+
+
+@for (c of categories(); track c.id) {
+<section [attr.id]="c.id" class="cat-block">
+    <header class="cat-header">
+        <h2>{{ c.name }}</h2>
+        <a class="link" [routerLink]="['/productos/browse']" [queryParams]="{ category: c.id }">Ver todos</a>
+    </header>
+
+    @if (!c.products?.length) {
+    <p class="empty">No hay productos en esta categoría.</p>
+    } @else {
+    <div class="grid">
+
+        @for(p of c.products; track p.id) {
+        <article class="card">
+            @if (p.imageUrl) {
+            <img [src]="p.imageUrl" alt="images" class="img"/>
+            }
+            <div ><a [routerLink]="['/productos', p.id]" class="name">{{ p.name }}</a></div>
+            @if (p.discount > 0) {
+            <div class="priceWithD">${{ productsApi.priceWithDiscount(p.price, p.discount) }}</div>
+            <div class="discount">${{ p.price }}</div>
+            }
+            @else {
+            <div>${{ p.price }}</div>
+            }
+            <button (click)="addToCart(p)" class="buttones">Agregar al carrito</button>
+        </article>
+        }
+    </div>
+    }
+</section>
+}

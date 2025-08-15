@@ -1,9 +1,25 @@
-<h1> Productos </h1>
+<h1 class="title"> Productos </h1>
 @if (loading || products.length === 0) { <h1 class="loading"> Cargando... </h1> }
-@for (p of products; track p.id) {
-<div class="card">
-    <a [routerLink]="['/products', p.id]">{{ p.name }}</a>
-    <div>\${{ p.price }}</div>
-     <button (click)="addToCart(p)">Agregar al carrito</button>
+
+<div class="container-p">
+    <a [routerLink]="['/productos/browse']" >Ver todos</a>
+
+    @for (p of products; track p.id) {
+        <div class="card">
+            @if (p.imageUrl) {
+                <img [src]="p.imageUrl" style="width:80px;height:80px;" />
+            }
+            <a [routerLink]="['/productos', p.id]">{{ p.name }}</a>
+            @if (p.discount > 0) {
+                <div class="priceWithD">${{ api.priceWithDiscount(p.price, p.discount) }}</div>
+                <div class="discount">${{ p.price }}</div>
+            } 
+            @else {
+                <div>${{ p.price }}</div>
+            }
+            
+             <button (click)="addToCart(p)" class="buttones">Agregar al carrito</button>
+        </div>
+        }
 </div>
-}
+

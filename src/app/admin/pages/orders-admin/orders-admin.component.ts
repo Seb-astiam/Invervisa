@@ -15,10 +15,10 @@ export class OrderAdminComponent {
     private api = inject(OrdersService);
     loading= true;
     orders: Order[] = [];
-    statusses = STATUSES;
+    statusses = STATUSES; 
 
     ngOnInit() {
-        this.load
+        this.load()
     }
 
     load() {

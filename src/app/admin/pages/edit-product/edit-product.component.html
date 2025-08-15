@@ -1,0 +1,106 @@
+
+@if (!product()) {
+    <h1>Editar producto</h1>
+    @if (loading) { <p>Cargando...</p> }
+  
+    @for (p of products; track p.id) {
+      <div class="card">
+        @if (p.imageUrl) {
+          <img [src]="p.imageUrl" alt="img" class="thumb" />
+        }
+        <div class="info">
+          <div class="name" (click)="selectedProduct(p.id)">{{ p.name }}</div>
+          <div class="price">$ {{ p.price }}</div>
+        </div>
+      </div>
+    }
+  }
+  @else {
+    <h1>Editar: {{ product()?.name }}</h1>
+    @if (loading) { <p>Cargando...</p> }
+  
+    <form [formGroup]="form" (ngSubmit)="save()" class="form">
+      <div class="grid">
+        <div>
+          <label>Nombre</label>
+          <input formControlName="name" />
+          @if (form.controls.name.invalid && form.controls.name.touched) {
+            <small class="error">Requerido</small>
+          }
+        </div>
+  
+        <div>
+          <label>Descripción</label>
+          <textarea formControlName="description" rows="3"></textarea>
+          @if (form.controls.description.invalid && form.controls.description.touched) {
+            <small class="error">Requerido</small>
+          }
+        </div>
+
+        <div>
+          <label>Marca</label>
+          <textarea formControlName="brand" rows="3"></textarea>
+          @if (form.controls.brand.invalid && form.controls.brand.touched) {
+            <small class="error">Requerido</small>
+          }
+        </div>
+  
+        <div class="row3">
+          <div>
+            <label>Precio</label>
+            <input type="number" step="0.01" formControlName="price" />
+            @if (form.controls.price.invalid && form.controls.price.touched) {
+              <small class="error">Requerido</small>
+            }
+          </div>
+  
+          <div>
+            <label>Stock</label>
+            <input type="number" step="1" formControlName="stock" />
+            @if (form.controls.stock.invalid && form.controls.stock.touched) {
+              <small class="error">Requerido</small>
+            }
+          </div>
+  
+          <div>
+            <label>Descuento (%)</label>
+            <input type="number" step="1" min="0" max="100" formControlName="discount" />
+          </div>
+        </div>
+  
+        <div>
+          <label>Categoría</label>
+          <select formControlName="categoryId">
+            <option value="" disabled>Seleccione categoría</option>
+            @for (c of categories; track c.id) {
+              <option [value]="c.id">{{ c.name }}</option>
+            }
+          </select>
+          @if (form.controls.categoryId.invalid && form.controls.categoryId.touched) {
+            <small class="error">Requerido</small>
+          }
+        </div>
+  
+        <div class="row2">
+          <div>
+            <label>Imagen (URL)</label>
+            <input formControlName="imageUrl" />
+          </div>
+          <div class="preview" *ngIf="form.value.imageUrl">
+            <img [src]="form.value.imageUrl!" alt="preview" />
+          </div>
+        </div>
+      </div>
+  
+      <div class="actions">
+        <button type="submit" [disabled]="form.invalid || saving">
+          {{ saving ? 'Guardando...' : 'Guardar cambios' }}
+        </button>
+        <button type="button" class="ghost" (click)="cancel()">Cancelar</button>
+        <button type="button" class="danger" (click)="remove()">Eliminar</button>
+      </div>
+  
+      @if (msg) { <p class="msg">{{ msg }}</p> }
+    </form>
+  }
+  

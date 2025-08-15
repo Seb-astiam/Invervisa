@@ -1,20 +1,61 @@
-<h1>Carrito</h1>
+
+
+<div class="layout">
+    <div>
+        <div class="container-t">
+            <div class="title">
+                <h1>Carrito</h1>
+                @if (items.length === 1) {
+                <p>({{ items.length }} producto)</p>
+                }
+                @else {
+                <p>({{ items.length }} productos)</p>
+                }
+            </div>
+        
+        
+            <a (click)="cleanCart()" class="clean">Vaciar carrito</a>
+        </div>
+
+        <div class="border">
+
+        
+        @for (i of items; track i.id) {
+        <div class="row">
+            <img [src]="i.product.imageUrl" style="width:80px;height:80px;" />
+            <p class="name">{{ i.product.name }}</p>
+
+            <button class="qty-btn buttones" (click)="decrease(i)">−</button>
+            <input class="qty-input" type="number" min="1" [(ngModel)]="i.quantity" (change)="updateQty(i)" />
+            <button class="qty-btn buttones" (click)="increase(i)">+</button>
+
+            @if (i.product.discount > 0) {
+                <div class="priceWithD">${{ product.priceWithDiscount(i.product.price, i.product.discount) }}</div>
+                <div class="discount">${{ i.product.price }}</div>
+            }
+            @else {
+                <div class="price">${{ i.product.price }}</div>
+            }
+
+            <button (click)="remove(i)" class="buttones remove">x</button>
+        </div>
+        }
+    </div>
+    </div>
+
+
+    @if (items.length) {
+    <div class="resume">
+        <p>Resumen del pedido</p>
+        <p>Ahorro en productos: ${{ savingsOnProducts() }}
+        </p>
+        <p>Total: ${{ subtotal() }}</p>
+        <button (click)="goCheckout()" class="buttones">Comprar ahora</button>
+    </div>
+    }
+</div>
 
 @if (loading) { <p>Cargando...</p> }
 @if (!loading && items.length === 0) {
-    <p>Tu carrito esta vacio. <a routerLink="/productos">Ver productos</a></p>
-}
-
-@for (i of items; track i.id) {
-    <div class="row">
-        <div class="name">{{ i.product.name }}</div>
-        <div class="price">\{{ i.product.price }}</div>
-        <input type="number" min="1" [(ngModel)]="i.quantity" (change)="updateQty(i)" />
-        <button (click)="remove(i)">Quitar</button>
-    </div>
-}
-
-@if (items.length) {
-    <h3>Subtotal: ${{ subtotal() }}</h3>
-    <button (click)="goCheckout()">Comprar ahora</button>
+<p>Tu carrito esta vacio. <a routerLink="/productos">Ver productos</a></p>
 }

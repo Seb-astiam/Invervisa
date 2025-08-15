@@ -1,4 +1,4 @@
-import { Inject, Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { environment } from "../../../environment/enviroment";
 import { HttpClient } from "@angular/common/http";
 
@@ -23,18 +23,18 @@ export interface Order {
 @Injectable({ providedIn: 'root' })
 export class OrdersService {
     private API = environment.apiUrl + '/orders';
-    private http = Inject(HttpClient);
+    private http = inject(HttpClient);
 
-    createFormCart(addressId: string) {
-        return this.http.post(`${this.API}/from-cart`, { addressId });
+    createFromCart(addressId: string) {
+        return this.http.post<Order>(`${this.API}/from-cart`, { addressId });
     }
 
     getMyOrders() {
-        return this.http.get(this.API + '/my');
+        return this.http.get<Order[]>(this.API + '/my');
     }
 
     getAll() {
-        return this.http.get(this.API);
+        return this.http.get<Order[]>(this.API);
     }
 
     updateStatus(id: string, status: Order['status']) {
