@@ -1,0 +1,61 @@
+.orders {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-family: var(--main-font);
+}
+
+.card {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: 5px;
+    color: gray;
+    border: 1px solid gainsboro
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-content: center;
+}
+
+/* .pending {
+
+} */
+/* 
+.orders .card:first-child {
+    color: black;
+} */
+.estado {
+    color: black;
+}
+
+.estado.pending {
+    background-color: #4caf50; /* Verde */
+}
+
+.card.pending {
+    color: black;
+}
+  
+.estado.paid {
+    background-color: #ff9800; /* Naranja */
+}
+  
+.estado.shipped {
+    background-color: #2196f3; /* Azul */
+}
+  
+.estado.cancelled {
+    background-color: #f44336; /* Rojo */
+}
+
+.estado.delivered {
+    background-color: gold;
+}
+
+body {
+    font-family: var(--main-font);
+}

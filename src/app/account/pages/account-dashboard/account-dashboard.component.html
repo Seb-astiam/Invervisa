@@ -1,5 +1,5 @@
-<h1>Mi cuenta</h1>
-
+<div class="account">
+  <h1>Mi cuenta</h1>
 @if (loading) { <p>Cargando...</p> }
 @if (!loading && me) {
   <section class="card">
@@ -16,3 +16,4 @@
     <a class="card link" routerLink="/account/security">Seguridad</a>
   </section>
 }
+</div>

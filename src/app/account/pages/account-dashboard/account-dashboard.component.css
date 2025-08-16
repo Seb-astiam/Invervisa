@@ -1,3 +1,23 @@
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
-.card{border:1px solid #eee;border-radius:8px;padding:1rem}
-.link{display:flex;align-items:center;justify-content:center;min-height:90px;font-weight:600;text-decoration:none}
+.account {
+    font-family: var(--main-font);
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1rem
+}
+.card{
+    border:1px solid #eee;
+    border-radius:8px;
+    padding:1rem
+}
+
+.link{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:90px;
+    font-weight:600;
+    text-decoration:none
+}

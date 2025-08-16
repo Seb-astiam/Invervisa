@@ -13,6 +13,11 @@ export interface OrderItem {
 export interface Order {
     id: string;
     userId: string;
+    user: { 
+        createdAt: string;
+        email: string;
+        name: string;
+    }
     status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
     totalPrice: number;
     createdAt: string;

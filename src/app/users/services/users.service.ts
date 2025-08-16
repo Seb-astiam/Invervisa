@@ -19,6 +19,14 @@ export interface ChangePasswordDto {
   newPassword: string;
 }
 
+export interface User {
+  name: string;
+  email: string;
+  createAt: string;
+  updateAt: string;
+  orders: any
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,6 +44,10 @@ export class UsersService {
 
   changePassword(dto: ChangePasswordDto) {
     return this.http.patch(`${this.API}/me/password`, dto)
+  }
+
+  getUserById(userId: String) {
+    return this.http.get(`${this.API}/${userId}`)
   }
   
 }

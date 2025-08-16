@@ -1,38 +1,42 @@
-<h1>Mis Pedidos</h1>
-@if (loading) {
-<h3>Cargando...</h3>
-}
+<section class="orders">
 
-@if (!loading && !orders.length) {
-<h3>No tienes ordenes aun.</h3>
-}
+    <h1>Mis Pedidos</h1>
+    @if (loading) {
+    <h3>Cargando...</h3>
+    }
 
-@for (o of orders; track o.id) {
-<article class="card">
-    <header class="row">
-        <div>#{{ o.id }}</div>
-        <div>Estado: <strong>{{ o.status }}</strong></div>
-        <div>Total: ${{ o.totalPrice }}</div>
-        <div>{{ o.createdAt }}</div>
-    </header>
+    @if (!loading && !orders.length) {
+    <h3>No tienes ordenes aun.</h3>
+    }
+    @for (o of orders; track o.id) {
+    <article [ngClass]="'card ' + o.status.toLowerCase()">
+        <!-- <div>{{ }}</div> -->
+        <header class="row">
+            <div [ngClass]="'estado ' + o.status.toLowerCase()">
+                Estado: <strong>{{ o.status }}</strong>
+            </div>
+            <div>Total: ${{ o.totalPrice }}</div>
+            <div>Fecha de orden: {{ o.createdAt | date: 'fullDate' }}</div>
+        </header>
 
-<section class="items">
-    @for (it of o.items; track it.id) {
-    <div class="item">
-        <div>{{ it.product?.name || it.productId }}</div>
-        <div>Cant: {{ it.quantity }}</div>
-        <div>Precio: ${{ it.priceAtPurchase }}</div>
-    </div>
+        <section class="items">
+            @for (it of o.items; track it.id) {
+            <div class="item">
+                <div>{{ it.product?.name || it.productId }}</div>
+                <div>Cant: {{ it.quantity }}</div>
+                <div>${{ it.priceAtPurchase }}</div>
+            </div>
+            }
+        </section>
+
+        @if (o.address) {
+        <footer class="addr">
+            Enviar a: {{ o.address.street }}, {{ o.address.city }}
+        </footer>
+        }
+
+
+    </article>
+
     }
 </section>
-
-@if (o.address) {
-<footer class="addr" >
-    Enviar a: {{ o.address.street }}, {{ o.address.city }}
-</footer>
-}
-
-
-</article>
-
-}

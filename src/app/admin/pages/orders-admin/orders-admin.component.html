@@ -2,8 +2,7 @@
 @for (o of orders; track o.id) {
 <article class="card">
     <header class="row">
-        <div>#{{ o.id }}</div>
-        <div>Usuario: {{ o.userId }}</div>
+        <div>Nombre del usuario: {{ o.user.name }}</div>
         <div>Total: ${{ o.totalPrice }}</div>
         <div>{{ o.createdAt | date:'short' }}</div>
     </header>
