@@ -53,6 +53,7 @@
     flex-direction: column;
     justify-content: space-around;
     height: 95%;
+    max-height: 500px;
     width: 80%;
     align-items: center;
     background-color: white;
