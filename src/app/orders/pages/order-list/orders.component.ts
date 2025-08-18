@@ -12,6 +12,7 @@ export class OrdersComponent {
     private api = inject(OrdersService);
     orders: Order[] = [];
     loading = true;
+    selectedOrder: Order | false = false
 
     ngOnInit() {
         this.api.getMyOrders().subscribe({
@@ -19,4 +20,9 @@ export class OrdersComponent {
             error: () => { this.loading = false } 
         });
     }
+
+    selectOrder(order: Order) {
+        this.selectedOrder = order;
+      }
+
 }

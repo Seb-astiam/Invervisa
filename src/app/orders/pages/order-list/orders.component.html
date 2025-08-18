@@ -1,3 +1,5 @@
+@if (!selectedOrder) {
+
 <section class="orders">
 
     <h1>Mis Pedidos</h1>
@@ -5,38 +7,78 @@
     <h3>Cargando...</h3>
     }
 
-    @if (!loading && !orders.length) {
+    @if (!loading && !orders.length ) {
     <h3>No tienes ordenes aun.</h3>
     }
-    @for (o of orders; track o.id) {
-    <article [ngClass]="'card ' + o.status.toLowerCase()">
-        <!-- <div>{{ }}</div> -->
-        <header class="row">
-            <div [ngClass]="'estado ' + o.status.toLowerCase()">
-                Estado: <strong>{{ o.status }}</strong>
-            </div>
-            <div>Total: ${{ o.totalPrice }}</div>
-            <div>Fecha de orden: {{ o.createdAt | date: 'fullDate' }}</div>
-        </header>
-
-        <section class="items">
-            @for (it of o.items; track it.id) {
-            <div class="item">
-                <div>{{ it.product?.name || it.productId }}</div>
-                <div>Cant: {{ it.quantity }}</div>
-                <div>${{ it.priceAtPurchase }}</div>
-            </div>
-            }
-        </section>
-
-        @if (o.address) {
-        <footer class="addr">
-            Enviar a: {{ o.address.street }}, {{ o.address.city }}
-        </footer>
+    <table class="table">
+        <thead class="thead">
+            <tr class="rowhead">
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    Dirección
+                </th>
+            </tr>
+        </thead>
+        @for (o of orders; track o.id) {
+        <tbody class="tbody">
+            <tr>
+                <td>
+                    {{ o.createdAt | date: 'fullDate' }}
+                </td>
+                <td>
+                    <div [ngClass]="'estado ' + o.status.toLowerCase()">
+                        {{ o.status }}
+                    </div> <br />
+                    <a (click)="selectOrder(o)" class="link">Ver detalle</a>
+                </td>
+                <td>
+                    Total: ${{ o.totalPrice }}
+                </td>
+                <td>
+                    {{ o.address?.street }}, {{ o.address?.city }}
+                </td>
+            </tr>
+        </tbody>
         }
-
-
-    </article>
-
-    }
+    </table>
 </section>
+}
+
+
+@if (selectedOrder) {
+<div class="card">
+    <div class="title">
+        <h3>Productos</h3>
+        
+    </div>
+
+    @for (it of selectedOrder.items; track it.id) {
+        <div class="row">
+            <img [src]="it.product?.imageUrl" style="height: 80px; width: 80px;" />
+            <p>{{ it.product?.name || it.productId }}</p>
+            <p> Cant: {{ it.quantity }}</p>
+            <p>${{ it.priceAtPurchase }}</p>
+            <p><strong>Total:</strong> ${{ selectedOrder.totalPrice }}</p>
+        </div>
+    }
+
+    <div class="resume">
+        <h3>Detalle de la orden</h3>
+        <button (click)="selectedOrder = false">Cerrar</button>
+        <p><strong>Estado:</strong> {{ selectedOrder.status }}</p>
+        <p><strong>Fecha:</strong> {{ selectedOrder.createdAt | date:'fullDate' }}</p>
+        <p><strong>Dirección:</strong>
+            {{ selectedOrder.address?.street }}, {{ selectedOrder.address?.city }}
+        </p>
+    </div>
+</div>
+
+}

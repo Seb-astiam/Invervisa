@@ -7,7 +7,7 @@ export interface OrderItem {
     productId: string;
     quantity: number;
     priceAtPurchase: number;
-    product?: { id: string; name: string; };
+    product?: { id: string; name: string; imageUrl?: string;  };
 }
 
 export interface Order {

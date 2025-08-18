@@ -1,47 +1,58 @@
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.thead th {
+    padding: 0px 10px;
+}
+
+.rowhead {
+    text-align: left;
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    font-size: 18px;
+}
+
+.tbody tr {
+    border-bottom: 1px solid #eee;
+}
+
+.tbody td {
+    padding: 10px;
+}
+
 .orders {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
     font-family: var(--main-font);
 }
 
-.card {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    padding: 5px;
-    color: gray;
-    border: 1px solid gainsboro
+.link {
+    text-decoration: none;
+    color: var(--color-text);
+    cursor: pointer;
 }
 
-.items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-content: center;
-}
-
-/* .pending {
-
-} */
-/* 
-.orders .card:first-child {
+.link:hover {
     color: black;
-} */
+    transition: 300ms;
+}
+
 .estado {
-    color: black;
+    padding: 2px 10px;
+    color: #eee;
+    font-weight: 700;
+    border-radius: 10px;
+    width: max-content;
 }
 
 .estado.pending {
-    background-color: #4caf50; /* Verde */
-}
-
-.card.pending {
-    color: black;
+    background-color: #ff9800;
 }
   
 .estado.paid {
-    background-color: #ff9800; /* Naranja */
+    background-color: #2196f3; /* Naranja */
 }
   
 .estado.shipped {
@@ -53,9 +64,17 @@
 }
 
 .estado.delivered {
-    background-color: gold;
+    background-color: #4caf50;
 }
 
-body {
+.card {
     font-family: var(--main-font);
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.title {
+    grid-column: span 2 / span 2;
 }
