@@ -7,7 +7,9 @@
 
 .links, .auth {
   display:flex; 
+  align-items: center;
   gap:.75rem; 
+  
 }
 
 a {
@@ -39,9 +41,15 @@ a:hover {
     color: black;
 }
 
-button {
+.btn {
+  background-color: transparent;
+  border: none;
   cursor: pointer;
 }
+
+/* .btn:hover {
+
+} */
 
 .user { 
   opacity:.8; 
@@ -49,6 +57,9 @@ button {
   color: var(--color-buton);
   font-weight: 700;
 }
+
+/* .logout {
+} */
 
 
 

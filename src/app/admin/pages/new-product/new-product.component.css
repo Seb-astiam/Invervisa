@@ -1,0 +1,43 @@
+.container {
+    text-align: center;
+    font-family: var(--main-font);
+}
+
+.page-header {
+    color: var(--color-text);
+}
+
+.form {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    padding: .5rem;
+    gap: 15px;
+    background-color: var(--color-back);
+}
+
+.field {
+    width: 300px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    text-align: start;
+    gap: 10px;
+    padding: .5rem;
+}
+
+.label {
+    font-weight: 700;
+}
+
+.form-actions {
+    display: flex;
+    gap: 50px;
+}
+
+.link {
+    color:black;
+}
+
+
+

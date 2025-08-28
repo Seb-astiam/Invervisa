@@ -25,18 +25,21 @@
 :root{
     --color-buton: #758F31; 
     --color-text: #758F31;
+    --color-back: #F6F7F1;
     --main-font: "Istok Web", sans-serif; 
     --logo-font: "Philosopher", sans-serif;
 }
 
 .buttones {
-  background-color: #F6F7F1;
+  background-color: var(--color-back);
   font-family: var(--main-font);
   font-weight: 700;
-  color: var(--color-buton);
-  border: none;
+  color: var(--color-text);
+  /* text-shadow: #000 1px 0px 1px; */
+  border: 0.5px solid var(--color-text);
   width: max-content;
   padding: 5px 8px;
+  border-radius: 10px;
 }
 
 .buttones:hover {

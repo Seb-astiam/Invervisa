@@ -1,3 +1,5 @@
+<!-- <a class="btn ghost" routerLink="/admin">Volver</a>
+
 @if(loading || orders.length === 0){ <h3>Cargando...</h3> }
 @for (o of orders; track o.id) {
 <article class="card">
@@ -25,4 +27,91 @@
 
     </section>
 </article>
-}
+} -->
+
+<div class="container">
+    <a class="link" routerLink="/admin">Volver</a>
+
+    <section class="toolbar">
+        <h2 class="title">Ordenes de compra</h2>
+
+        <div class="tools">
+
+            <input type="search" placeholder="Buscar por nombre de usuario o producto" [(ngModel)]="query"
+                (input)="applyFilters()" class="input" />
+
+            <select [(ngModel)]="statusFilter" (change)="applyFilters()" aria-label="Filtrar por estado">
+                <option value="">Todos los estados</option>
+                @for (s of statusses; track s) {
+                <option [value]="s">{{ s }}</option>
+                }
+            </select>
+        </div>
+    </section>
+
+
+    @if (loading) {
+    <div class="state muted">Cargando…</div>
+    } @else if (!filtered || filtered.length === 0) {
+    <div class="state empty">
+        <p>No hay órdenes para mostrar.</p>
+        <small>Prueba cambiando los filtros o la búsqueda.</small>
+    </div>
+    } @else {
+    <div class="table-wrap">
+        <table class="orders">
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Total</th>
+                    <th>Fecha</th>
+                    <th class="min">Estado</th>
+                    <th>Envío</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (o of filtered; track o.id) {
+                <tr>
+                    <td data-label="Usuario">
+                        <div class="user">
+                            <span class="name">{{ o.user.name || '—' }}</span>
+                            <small class="id">#{{ o.id }}</small>
+                        </div>
+                    </td>
+
+                    <td data-label="Total">
+                        {{ o.totalPrice | currency:'COP':'symbol-narrow':'1.0-0' }}
+                    </td>
+
+                    <td data-label="Fecha">
+                        {{ o.createdAt | date:'short' }}
+                    </td>
+
+                    <td data-label="Estado" class="min">
+                        <select [(ngModel)]="o.status" (change)="update(o)">
+                            @for (s of statusses; track s) {
+                            <option [value]="s">{{ s }}</option>
+                            }
+                        </select>
+                    </td>
+
+                    <td data-label="Envío">
+                        @if (o.address) {
+                        {{ o.address.street }}, {{ o.address.city }}
+                        } @else {
+                        <span class="muted">Sin dirección</span>
+                        }
+                    </td>
+
+
+
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    }
+
+
+</div>

@@ -8,4 +8,4 @@ export const PRODUCTS_ROUTES: Routes = [
     { path: '', component: BrowseByCategoryComponent },
     { path: 'browse', component: CategoryBrowseComponent },
     { path: ':id', component: ProductDetailComponent },
-]
+] 

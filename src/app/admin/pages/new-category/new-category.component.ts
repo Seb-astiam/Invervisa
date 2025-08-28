@@ -7,18 +7,9 @@ import { CategoryService, CreateCategory } from "../../../categories/services/ca
 @Component({
     standalone: true,
     imports: [CommonModule, ReactiveFormsModule, RouterLink],
-    template: `
-        <h2>Nueva Categoria</h2>
-        <form [formGroup]="form" (ngSubmit)="save()">
-            <label>Nombre</label>
-            <input formControlName="name"/>
-            <label>Descripción</label>
-            <input formControlName="description"/> 
-            <button type="submit" [disabled]="form.invalid || loading">Guardar</button>
-            <a routerLink="/admin">Volver</a>
-        </form>
-        @if (msg) { <h3>{{ msg }}</h3> }
-    `
+    templateUrl: './new-category.component.html',
+    styleUrl: './new-category.component.css'
+    
 })
 export class NewCategoryComponent {
     private fb = inject(FormBuilder);

@@ -1,37 +1,85 @@
-<h2>Nuevo Producto</h2>
+<div class="container">
+    <header class="page-header">
+        <h2 class="title">Nuevo Producto</h2>
+        <p class="subtitle">Crea un producto con su precio, stock y categoría.</p>
+      </header>
 
-<form [formGroup]="form" (ngSubmit)="save()">
-    <label>Nombre</label>
-    <input formControlName="name" />
+    <form [formGroup]="form" (ngSubmit)="save()" class="form">
+        <div class="field">
+            <label for="name" class="label">Nombre <span class="req" aria-hidden="true">*</span></label>
+            <input id="name" class="input" placeholder="Ej: Paracetamol 500 mg x10" formControlName="name" />
+            <!-- @if (form.controls?.['name']?.touched && form.controls?.['name']?.invalid) {
+              <small class="hint error">El nombre es obligatorio.</small>
+            } -->
+          </div>
+ 
+          <div class="field">
+            <label for="description" class="label">Descripción</label>
+            <textarea id="description" class="textarea" placeholder="Breve descripción del producto" formControlName="description" rows="3"></textarea>
+          </div>
 
-    <label>Descripción</label>
-    <input formControlName="description" />
+          <div class="field">
+            <label for="brand" class="label">Marca <span class="req" aria-hidden="true">*</span></label>
+            <input id="brand" class="input" placeholder="Ej: MK, Genfar, Tecnoquímicas" formControlName="brand" />
+          </div>
 
-    <label>Precio</label>
-    <input type="number" step="0.01" formControlName="price" />
+        <div class="field">
+            <label for="price" class="label">Precio COP<span class="req" aria-hidden="true">*</span></label>
+            <input 
+                id="price" 
+                type="number" 
+                step="1" 
+                min="100"
+                inputmode="numeric"
+                placeholder="0"
+                formControlName="price"
+            />
+        </div>
 
-    <label>Stock</label>
-    <input type="number" formControlName="stock" />
+        <div class="field">
+            <label for="stock" class="label">Stock <span class="req" aria-hidden="true">*</span></label>
+            <input
+              id="stock"
+              class="input input--number"
+              type="number"
+              min="0"
+              step="1"
+              inputmode="numeric"
+              placeholder="0"
+              formControlName="stock"
+            />
+          </div>
 
-    <label>Categoria</label>
-    <select formControlName="category">
-        <option value="" disabled selected>Seleccione categoría</option>
-       
-        @for (c of categories; track c.id) {
+
+       <div class="field">
+        <label for="categoryId" class="label">Categoría <span class="req" aria-hidden="true">*</span></label>
+        <select id="categoryId" class="select" formControlName="categoryId">
+          <option value="" disabled selected>Seleccione categoría</option>
+          @for (c of categories; track c.id) {
             @if (!c) {
-                <p>Aun no hay categorias</p>
-            } 
-            @else {
-                <option [value]="c.id">{{ c.name }}</option>
+              <option disabled>No hay categorías disponibles</option>
             }
-        }
-    </select>
+            @else {
+              <option [value]="c.id">{{ c.name }}</option>
+            }
+          }
+        </select>
+        @if (categories.length === 0) {
+            <small class="hint">Si no ves la categoría, créala primero en el panel de administrador.</small>
+        } 
+      </div>
 
-    <label>Imagen (URL)</label>
-    <input formControlName="imageUrl" />
+      <div class="field">
+        <label for="imageUrl" class="label">Imagen (URL)</label>
+        <input id="imageUrl" class="input" placeholder="https://..." formControlName="imageUrl" />
+      </div>
 
-    <button type="submit" [disabled]="form.invalid || loading">Guardar</button>
-    <a routerLink="/admin">Volver</a>
-</form>
+      <div class="form-actions">
+        <button class="buttones" type="submit" [disabled]="form.invalid || loading">Guardar</button>
+        <a class="link" routerLink="/admin">Volver</a>
+      </div>
+    </form>
 
-@if (msg) { <h2>{{ msg }}</h2>}
+    @if (msg) { <h2>{{ msg }}</h2>}
+
+</div>

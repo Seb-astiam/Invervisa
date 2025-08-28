@@ -1,46 +1,117 @@
-<h1 class="title">Categorías</h1>
-
-@if (loading()) { <p>Cargando...</p> }
-@if (!loading() && !categories().length) { <p>Sin categorías.</p> }
-
-@if (categories().length) {
-<div class="tabs">
-    @for (c of categories(); track c.id) {
-    <a (click)="scrollTo(c.id)">{{ c.name }}</a>
-    }
-</div>
-}
-
-
-@for (c of categories(); track c.id) {
-<section [attr.id]="c.id" class="cat-block">
-    <header class="cat-header">
-        <h2>{{ c.name }}</h2>
-        <a class="link" [routerLink]="['/productos/browse']" [queryParams]="{ category: c.id }">Ver todos</a>
+<div class="categories-container">
+    <header class="page-header">
+        <h1 class="page-title">Explorar Nuestros Productos</h1>
     </header>
 
-    @if (!c.products?.length) {
-    <p class="empty">No hay productos en esta categoría.</p>
-    } @else {
-    <div class="grid">
-
-        @for(p of c.products; track p.id) {
-        <article class="card">
-            @if (p.imageUrl) {
-            <img [src]="p.imageUrl" alt="images" class="img"/>
-            }
-            <div ><a [routerLink]="['/productos', p.id]" class="name">{{ p.name }}</a></div>
-            @if (p.discount > 0) {
-            <div class="priceWithD">${{ productsApi.priceWithDiscount(p.price, p.discount) }}</div>
-            <div class="discount">${{ p.price }}</div>
-            }
-            @else {
-            <div>${{ p.price }}</div>
-            }
-            <button (click)="addToCart(p)" class="buttones">Agregar al carrito</button>
-        </article>
-        }
+    @if (loading()) { 
+    <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <p>Cargando categorías...</p>
     </div>
     }
-</section>
-}
+
+    @if (!loading() && !categories().length) { 
+    <div class="empty-state">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            <path d="M9 9h.01M15 9h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <h3>No hay categorías disponibles</h3>
+        <p>Por el momento no hay categorías para mostrar.</p>
+    </div>
+    }
+
+    @if (categories().length) {
+    <nav class="categories-navigation">
+        <div class="nav-tabs">
+            @for (c of categories(); track c.id) {
+            <button 
+                class="nav-tab" 
+                (click)="scrollTo(c.id)"
+                [class.active]="c.id === activeCategory()"
+            >
+                {{ c.name }}
+            </button>
+            }
+        </div>
+    </nav>
+    }
+
+    <div class="categories-content">
+        @for (c of categories(); track c.id) {
+        <section [attr.id]="c.id" class="category-section">
+            <header class="category-header">
+                <div class="category-info">
+                    <h2 class="category-title">{{ c.name }}</h2>
+                            @if (c.products && c.products.length > 0) {
+        <span class="product-count">{{ c.products.length }} productos</span>
+        }
+                </div>
+                <a class="view-all-link" [routerLink]="['/productos/browse']" [queryParams]="{ category: c.id }">
+                    Ver todos
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                </a>
+            </header>
+
+            @if (!c.products?.length) {
+            <div class="empty-category">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <path d="M9 9h.01M15 9h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p>No hay productos en esta categoría.</p>
+            </div>
+            } @else {
+            <div class="products-grid">
+                @for(p of c.products; track p.id) {
+                <article class="product-card">
+                    <div class="product-image-container">
+                        @if (p.imageUrl) {
+                        <img [src]="p.imageUrl" [alt]="p.name" class="product-image"/>
+                        } @else {
+                        <div class="image-placeholder">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                <circle cx="8.5" cy="8.5" r="1.5"/>
+                                <path d="M21 15l-5-5L5 21"/>
+                            </svg>
+                        </div>
+                        }
+                    </div>
+                    
+                    <div class="product-info">
+                        <h3 class="product-name">
+                            <a [routerLink]="['/productos', p.id]">{{ p.name }}</a>
+                        </h3>
+                        
+                        <div class="product-pricing">
+                            @if (p.discount > 0) {
+                            <div class="price-container">
+                                <span class="current-price">${{ productsApi.priceWithDiscount(p.price, p.discount) }}</span>
+                                <span class="original-price">${{ p.price }}</span>
+                                <span class="discount-badge">-{{ p.discount }}%</span>
+                            </div>
+                            } @else {
+                            <span class="current-price">${{ p.price }}</span>
+                            }
+                        </div>
+                        
+                        <button (click)="addToCart(p)" class="add-to-cart-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                <path d="M20 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                            </svg>
+                            Agregar
+                        </button>
+                    </div>
+                </article>
+                }
+            </div>
+            }
+        </section>
+        }
+    </div>
+</div>

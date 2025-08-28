@@ -19,7 +19,9 @@
             <a routerLink="/auth/register">Crear Cuenta</a>
         } @else {
             <span class="user">Hola, {{ user()?.name }}</span>
-            <button (click)="logout()">Salir</button>
+            <button (click)="logout()" class="btn" >
+                <img  src="/logout.svg" alt="logout" class="logout"/>
+            </button>
         }
     </div>
 </nav>
