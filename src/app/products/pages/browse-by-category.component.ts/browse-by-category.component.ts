@@ -5,10 +5,11 @@ import { Category, CategoryService } from '../../../categories/services/categori
 import { Product, ProductsService } from '../../services/products.service';
 import { AuthService } from '../../../auth/services/auth.services';
 import { CartService } from '../../../cart/services/cart.service';
+import { AdCarouselComponent } from '../../../shared/components/ad-carousel/ad-carousel.component';
 
 @Component({
   selector: 'app-browse',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, AdCarouselComponent],
   templateUrl: './browse-by-category.component.html',
   styleUrl: './browse-by-category.component.css'
 })

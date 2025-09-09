@@ -1,5 +1,15 @@
 <div class="layout">
-    <div>
+    <div class="general">
+
+        <a routerLink="/productos" class="back">
+            <button class="icon-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24" height="24" fill="#000000">
+                    <path d="M400-80 0-480l400-400 71 71-329 329 329 329-71 71Z" />
+                </svg>
+            </button>
+            Productos
+        </a>
+
         <div class="container-t">
             <div class="title">
                 <h1>Carrito</h1>
@@ -20,42 +30,84 @@
 
             @for (i of items; track i.id) {
             <div class="row">
-                <img [src]="i.product.imageUrl" style="width:80px;height:80px;" />
-                <p class="name">{{ i.product.name }}</p>
+                <div class="img-name-price">
+                    <img class="image" [src]="i.product.imageUrl" />
+                    <div class="name-price">
+                        <p class="name">{{ i.product.name }}</p>
+                        @if (i.product.discount > 0) {
+                        <p class="price">{{ priceXItems(product.priceWithDiscount(i.product.price, i.product.discount), i.quantity )  | currency:'COP':'symbol-narrow':'1.0-0' }}</p>
+                        <div class="card-prices">
+                            <p class="discount"> -{{ i.product.discount }}% </p>
+                            <p class="real-price">{{ i.product.price | currency:'COP':'symbol-narrow':'1.0-0' }} </p>
+                        </div>
+                        }
+                        @else {
+                        <div class="price">{{ priceXItems(i.product.price, i.quantity)  | currency:'COP':'symbol-narrow':'1.0-0' }}</div>
+                        }
+                    </div>
+                </div>
 
-                <button class="qty-btn buttones" (click)="decrease(i)">−</button>
-                <input class="qty-input" type="number" min="1" [(ngModel)]="i.quantity" (change)="updateQty(i)" />
-                <button class="qty-btn buttones" (click)="increase(i)">+</button>
 
-                @if (i.product.discount > 0) {
-                <div class="priceWithD">${{ product.priceWithDiscount(i.product.price, i.product.discount) }}</div>
-                <div class="discount">${{ i.product.price }}</div>
-                }
-                @else {
-                <div class="price">${{ i.product.price }}</div>
-                }
+                <div class="controls">
+                    @if (i.quantity === 1) {
+                    <button (click)="remove(i)" class="reset">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="25px" viewBox="0 -960 960 960" width="25px"
+                            fill="#000000">
+                            <path
+                                d="M267.33-120q-27.5 0-47.08-19.58-19.58-19.59-19.58-47.09V-740H160v-66.67h192V-840h256v33.33h192V-740h-40.67v553.33q0 27-19.83 46.84Q719.67-120 692.67-120H267.33Zm425.34-620H267.33v553.33h425.34V-740Zm-328 469.33h66.66v-386h-66.66v386Zm164 0h66.66v-386h-66.66v386ZM267.33-740v553.33V-740Z" />
+                        </svg>
+                    </button>
+                    <input class="qty-input reset" type="number" min="1" [(ngModel)]="i.quantity"
+                        (change)="updateQty(i)" />
+                    <button class="reset " (click)="increase(i)">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#000000">
+                            <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                        </svg>
+                    </button>
+                    } @else {
+                    <button class="reset" (click)="decrease(i)">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#000000">
+                            <path d="M240-440v-80h480v80H240Z" />
+                        </svg>
+                    </button>
+                    <input class="qty-input reset" type="number" min="1" [(ngModel)]="i.quantity"
+                        (change)="updateQty(i)" />
+                    <button class="reset" (click)="increase(i)">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                            fill="#000000">
+                            <path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z" />
+                        </svg>
+                    </button>
+                    }
 
-                <button (click)="remove(i)" class="buttones remove">x</button>
+                </div>
+
+
+
             </div>
             }
         </div>
     </div>
 
     <div class="resume">
-        <p>Resumen del pedido</p>
+        <div class="subtotal">
+            <p>Subtotal</p>
+            <p class="total">{{ subtotal() | currency:'COP':'symbol-narrow':'1.0-0' }}</p>
+        </div>
+
         @if (items.length) {
-        <p>Ahorro en productos: ${{ savingsOnProducts() }}
-        </p>
-        <p>Total: ${{ subtotal() }}</p>
-        <button (click)="goCheckout()" class="buttones">Comprar ahora</button>
+            <!-- <app-checkout></app-checkout> -->
+        <button (click)="goCheckout()" class="continuar">Continuar</button>
         } @else {
-            <p>No hay productos aun!</p>
+        <p>No hay productos aun!</p>
         }
     </div>
 
 
-@if (loading) { <p>Cargando...</p> }
-@if (!loading && items.length === 0) {
-<p>Tu carrito esta vacio. <a routerLink="/productos">Ver productos</a></p>
-}
+    @if (loading) { <p>Cargando...</p> }
+    @if (!loading && items.length === 0) {
+    <p>Tu carrito esta vacio. <a routerLink="/productos">Ver productos</a></p>
+    }
 </div>

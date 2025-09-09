@@ -7,6 +7,18 @@
 
 }
 
+.head {
+    display: flex;
+    justify-content: center;  /* centra el logo */
+    align-items: center;
+  }
+
+  .logo {
+    min-width: 400px;         /* límite para pantallas grandes */
+    width: 100%;              /* ocupa todo el ancho disponible del contenedor */
+    height: auto;             /* mantiene proporción */
+  }
+
 
 .body {
     background-color: var(--color-back);

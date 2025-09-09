@@ -6,6 +6,7 @@ import { Address, AddressService } from "../../../addresses/services/addresses.s
 import { OrdersService } from "../../services/orders.service";
 
 @Component({
+    selector: 'app-checkout',
     standalone: true,
     imports: [CommonModule, FormsModule, RouterLink],
     templateUrl: './checkout.component.html',

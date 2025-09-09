@@ -1,4 +1,19 @@
 <div class="categories-container">
+
+    <!-- en cualquier template -->
+<app-ad-carousel
+class="carousel"
+[slides]="[
+  { imageUrl: 'https://i.shgcdn.com/e228ab00-9de2-40c7-bbde-8908094486e7/-/format/auto/-/preview/3000x3000/-/quality/lighter/', alt:'Promo 1', link:'/productos/browse?category=fb790410-afcb-40b3-b6d7-cf98214a601a' },
+  { imageUrl: 'https://images.ctfassets.net/2ql69mthp94m/6XSitwk3rMv6epEjBLEodq/9e75e18cbc54b552f949bb9b47f6cd36/pampers_banner-1-ESP-700x340px.jpg?fm=webp&q=70', alt:'Promo 2', link:'productos/browse?category=b3d9d441-8461-4116-b9ad-d8f72b227b9b' },
+  { imageUrl: 'https://copu.media/wp-content/uploads/2024/05/2F-1.png', alt:'Promo 3', link:'productos/browse?category=b9c738bf-bfcb-4a59-953e-0773f6087383' }
+]"
+[autoplay]="true"
+[intervalMs]="5000"
+[showArrows]="false"
+[showDots]="true"
+/>
+
     <header class="page-header">
         <h1 class="page-title">Explorar Nuestros Productos</h1>
     </header>
@@ -21,7 +36,7 @@
     </div>
     }
 
-    @if (categories().length) {
+    @if (categories().length) { 
     <nav class="categories-navigation">
         <div class="nav-tabs">
             @for (c of categories(); track c.id) {

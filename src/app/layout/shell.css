@@ -1,25 +1,19 @@
-app-nav {
-  flex-grow: 1; 
-  height: 100%;  
-  display: flex;
-  align-items: center;
-}
-
-.page-entrada {
-    flex-grow: 1;
-}
-
 .invervisa {
     background-color: #FBFCF3;
     height: 100px;
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 10px;
+    justify-content: space-between;
 }
 
 
 .logo{
     width: 200px;
     flex-shrink: 0;
+}
+
+.layout {
+    margin: 0;
+    padding: 0;
 }

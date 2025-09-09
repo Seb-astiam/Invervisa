@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AddressService, Address } from '../../services/addresses.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-addresses-page',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './addresses-page.component.html',
   styleUrl: './addresses-page.component.css'
 })

@@ -1,11 +1,13 @@
-
-.container-t {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.layout {
     font-family: var(--main-font);
-    color: var(--color-text);
-    padding: 0px 10px;
+}
+
+.clean {
+    text-decoration: underline;
+    cursor: pointer;
+    color: red;
+    font-weight: 400;
+    opacity: .7;
 }
 
 .title {
@@ -15,82 +17,175 @@
     gap: 10px;
 }
 
-.clean {
-    text-decoration: underline;
-    cursor: pointer;
+.container-t {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-text);
+    width: 100%;
 }
 
-.clean:hover {
-    color: black;
-    transition: 300ms;
+.img-name-price {
+    display: flex;
 }
 
-.layout {
-    display: grid;
-    grid-template-columns: 2fr 1fr; 
-    grid-column-gap: 20px;
-    padding: 10px;
-}
 
-.border {
-    border: 1px solid gainsboro;
+
+.image {
+    width:80px;
+    height:80px;
+    border-radius: 15px;
+    border: 1px solid transparent;
 }
 
 .row {
     display: flex;
     width: 100%;
-    height: 100px;
-    align-items: center;
-    justify-content: space-evenly;
+    height: 120px;
+    align-items: start;
+    justify-content: space-between;
     background-color: white;
-    font-family: var(--main-font);
     position: relative; 
-    border-bottom: 0.1px solid gainsboro
+    border-bottom: 0.5px solid gainsboro
 }
 
-.resume {
-    font-family: var(--main-font);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    height: 95%;
-    max-height: 500px;
-    width: 80%;
-    max-width: 300px;
-    align-items: center;
-    background-color: white;
-    padding: 10px;
-    /* border-radius: 10px; */
-    border: 1px solid gainsboro;
-}
+
 
 .qty-input {
     width: 40px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     text-align: center;
 }
 
-.qty-btn {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
+.reset {
     cursor: pointer;
-} 
+    border: none;
+    background-color: transparent;
+}
 
-.remove {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    cursor: pointer;
+.total {
+    font-size: 30px;
+}
+
+.border { max-height: none; overflow: visible; }
+.border:has(.row:nth-child(4)) {
+    max-height: 480px;       
+    overflow-y: auto;
+  }
+
+
+/* media para tabletas y pc */
+@media (min-width: 769px) {
+    .layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+
+    .border {
+        border: 1px solid gainsboro;
+        border-radius: 15px;
+        padding: 10px;
+    }
+
+    .img-name-price {
+        gap: 40px
+    }
+
+    .controls { 
+        padding: 5px;
+        margin-top: 10px;
+    }
+
+    .resume {
+        height: min-content;
+        margin-top: 70px;
+        text-align: center;
+    }
+
+    .clean:hover {
+        color: black;
+        transition: 300ms;
+    }
+
+}
+
+/* media para telefonos */
+@media (max-width: 768px) {
+    .layout{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .general {
+        width: 100%;
+    }
+
+    .resume {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        height: 90px;
+        border-top: 1px solid gainsboro;
+        box-shadow: 0 -3px 5px rgba(0,0,0,0.1) ;
+    }
+
+    .img-name-price {
+        gap: 5px;
+    }
+
+    .controls { 
+        padding: 2px;
+        margin-top: 5px;
+    }
+}
+
+.name-price {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
+.card-prices {
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
 
 .discount{
+    background-color: gold;
+    width: min-content;
+    padding: 2px;
+    font-weight: 700;
+}
+
+.real-price {
+    color: var(--color-text);
     text-decoration: line-through;
-    color: gray;
 }
 
-.priceWithD {
-    color: var(--color-buton);
+.price {
+    font-weight: 700;
+} 
+
+.controls {
+    border: #ccc 1px solid;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+  
 }
 
+.continuar {
+    width: 150px;
+    height: 45px;
+    font-size: 20px;
+
+    border-radius: 20px;
+    border: none;
+    background-color: var(--color-text);
+    color: white;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2) ;
+}
