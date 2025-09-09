@@ -1,10 +1,11 @@
 import { Component, inject } from "@angular/core";
 import { Order, OrdersService } from "../../services/orders.service";
 import { DatePipe, NgClass } from "@angular/common";
+import { RouterLink } from "@angular/router";
 
 @Component({
     selector: 'app-orders',
-    imports: [DatePipe, NgClass],
+    imports: [DatePipe, NgClass, RouterLink],
     templateUrl: './orders.component.html',
     styleUrl: './orders.component.css'
 })

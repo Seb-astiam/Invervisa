@@ -3,10 +3,11 @@ import { Component, inject, signal } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
 import { Product, ProductsService } from "../../../products/services/products.service";
 import { Category, CategoryService } from "../../../categories/services/categories.service";
+import { RouterLink } from "@angular/router";
 
 @Component({
     selector: 'app-edit-product',
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [CommonModule, ReactiveFormsModule, RouterLink],
     templateUrl: './edit-product.component.html',
     styleUrl: './edit-product.component.css'
 })
@@ -63,6 +64,7 @@ export class EditProductComponent {
             this.form.patchValue({
               name: res.name,
               description: res.description,
+              brand: res.brand,
               price: Number(res.price),
               stock: res.stock,
               discount: (res as any)?.discount ?? 0,

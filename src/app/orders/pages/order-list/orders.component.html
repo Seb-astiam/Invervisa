@@ -1,11 +1,14 @@
 @if (!selectedOrder) {
 
 <section class="orders">
+    <a routerLink="/account">Volver</a>
+
 
     <h1>Mis Pedidos</h1>
     @if (loading) {
     <h3>Cargando...</h3>
     }
+
 
     @if (!loading && !orders.length ) {
     <h3>No tienes ordenes aun.</h3>
@@ -37,7 +40,7 @@
                     <div [ngClass]="'estado ' + o.status.toLowerCase()">
                         {{ o.status }}
                     </div> <br />
-                    <a (click)="selectOrder(o)" class="link">Ver detalle</a>
+                    <a [routerLink]="['/orders/detail/', o.id]" class="link">Ver detalle</a>
                 </td>
                 <td>
                     Total: ${{ o.totalPrice }}
@@ -50,35 +53,4 @@
         }
     </table>
 </section>
-}
-
-
-@if (selectedOrder) {
-<div class="card">
-    <div class="title">
-        <h3>Productos</h3>
-        
-    </div>
-
-    @for (it of selectedOrder.items; track it.id) {
-        <div class="row">
-            <img [src]="it.product?.imageUrl" style="height: 80px; width: 80px;" />
-            <p>{{ it.product?.name || it.productId }}</p>
-            <p> Cant: {{ it.quantity }}</p>
-            <p>${{ it.priceAtPurchase }}</p>
-            <p><strong>Total:</strong> ${{ selectedOrder.totalPrice }}</p>
-        </div>
-    }
-
-    <div class="resume">
-        <h3>Detalle de la orden</h3>
-        <button (click)="selectedOrder = false">Cerrar</button>
-        <p><strong>Estado:</strong> {{ selectedOrder.status }}</p>
-        <p><strong>Fecha:</strong> {{ selectedOrder.createdAt | date:'fullDate' }}</p>
-        <p><strong>Dirección:</strong>
-            {{ selectedOrder.address?.street }}, {{ selectedOrder.address?.city }}
-        </p>
-    </div>
-</div>
-
 }

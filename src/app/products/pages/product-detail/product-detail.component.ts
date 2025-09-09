@@ -40,4 +40,15 @@ export class ProductDetailComponent {
         });
     }
 
+    decreaseQuantity() {
+        if (this.qty > 1) {
+            this.qty--;
+        }
+    }
+
+    increaseQuantity() {
+        if (this.qty < 99) {
+            this.qty++;
+        }
+    }
 }

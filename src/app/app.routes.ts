@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { ProductsComponent } from './products/pages/product-list/productos.component';
 import { EntradaComponent } from './pages/entrada/entrada.component';
 import { ShellComponent } from './layout/shell';
 import { authGuard } from './auth/guards/auth.guard';

@@ -25,18 +25,21 @@
 :root{
     --color-buton: #758F31; 
     --color-text: #758F31;
+    --color-back: #F6F7F1;
     --main-font: "Istok Web", sans-serif; 
     --logo-font: "Philosopher", sans-serif;
 }
 
 .buttones {
-  background-color: #F6F7F1;
+  background-color: var(--color-back);
   font-family: var(--main-font);
   font-weight: 700;
-  color: var(--color-buton);
-  border: none;
+  color: var(--color-text);
+  /* text-shadow: #000 1px 0px 1px; */
+  border: 0.5px solid var(--color-text);
   width: max-content;
   padding: 5px 8px;
+  border-radius: 10px;
 }
 
 .buttones:hover {
@@ -46,4 +49,34 @@
   transition: 200ms;
 }
 
+a {
+  text-decoration: none;
+  font-family: var(--main-font);
+  font-weight: 700;
+  color: var(--color-text); 
+  display: flex;
+  align-items: center;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;         
+  border: none;              
+  background-color: #F6F7F1;  
+  display: flex;             
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.back {
+  margin-top: 3px;
+}
   

@@ -1,3 +1,5 @@
+<div class="container">
+  <a class="btn ghost" routerLink="/admin">Volver</a>
 
 @if (!product()) {
     <h1>Editar producto</h1>
@@ -39,7 +41,7 @@
 
         <div>
           <label>Marca</label>
-          <textarea formControlName="brand" rows="3"></textarea>
+          <textarea formControlName="brand" rows="1"></textarea>
           @if (form.controls.brand.invalid && form.controls.brand.touched) {
             <small class="error">Requerido</small>
           }
@@ -103,4 +105,4 @@
       @if (msg) { <p class="msg">{{ msg }}</p> }
     </form>
   }
-  
+</div>

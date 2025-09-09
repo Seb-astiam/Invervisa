@@ -1,21 +1,15 @@
 import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule, Validators } from "@angular/forms";
-import { AuthService, RegisterDto } from "../services/auth.services";
-import { Router } from "@angular/router";
+import { AuthService, RegisterDto } from "../../services/auth.services";
+import { Router, RouterLink } from "@angular/router";
 
 @Component({
     standalone: true,
     selector: 'app-register',
-    imports: [CommonModule, ReactiveFormsModule],
-    template: `
-    <form [formGroup]="form" (ngSubmit)="submit()">
-        <input formControlName="name" placeholder="nombre" />
-        <input formControlName="email" placeholder="correo" />
-        <input formControlName="password" placeholder="contraseña"/>
-        <button type="submit">Registrar</button>
-    </form>
-    `
+    imports: [CommonModule, ReactiveFormsModule, RouterLink],
+    templateUrl: "./register.page.html",
+    styleUrl: './register.page.css'
 })
 export class RegisterPage {
     private fb = inject(FormBuilder);

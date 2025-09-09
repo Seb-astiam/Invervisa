@@ -1,8 +1,8 @@
 <div class="layout">
     <aside class="sidebar">
-        <h3>Categorias</h3>
+        <h3>Categorías</h3>
         @if (loadingCats()) {
-        <p>Cargando...</p>
+        <p>Cargando categorías...</p>
         }
 
         @for (c of categories(); track c.id) {
@@ -14,33 +14,46 @@
         <header class="head">
             <h1>{{ currentCategoryName() }}</h1>
             @if (!loadingProds()) {
-            <p>{{ products().length }} resultados</p>
+            <p>{{ products().length }} productos encontrados</p>
             }
         </header>
 
-        @if (loadingProds()) { <p>Cargando productos...</p> }
-        @if (!loadingProds() && products().length === 0) {
-        <p>No hay productos en esta categoría.</p>
+        @if (loadingProds()) { 
+        <div class="loading">
+            <p>Cargando productos...</p>
+        </div>
         }
-        @if (!loadingProds()) {
-
+        
+        @if (!loadingProds() && products().length === 0) {
+        <div class="empty-state">
+            <p>No hay productos en esta categoría.</p>
+        </div>
+        }
+        
+        @if (!loadingProds() && products().length > 0) {
         <div class="grid">
             @for (p of products(); track p.id) {
             <article class="card">
                 @if (p.imageUrl) {
-                <img [src]="p.imageUrl" alt="" style="height: 80px; width: 80px;" />
+                <img [src]="p.imageUrl" [alt]="p.name" />
+                } @else {
+                <div class="placeholder-image">
+                    <span>Sin imagen</span>
+                </div>
                 }
 
-                <div class="name">
-                    <a [routerLink]="['/productos', p.id]">{{ p.name }}</a>
-                </div>
-                <div class="price">
-                    @if (p.discount > 0) {
-                    <span class="new">$ {{ productsApi.priceWithDiscount(p.price, p.discount) }}</span>
-                    <span class="old">$ {{ p.price }}</span>
-                    } @else {
-                    <span class="new">$ {{ p.price }}</span>
-                    }
+                <div class="card-content">
+                    <div class="name">
+                        <a [routerLink]="['/productos', p.id]">{{ p.name }}</a>
+                    </div>
+                    <div class="price">
+                        @if (p.discount > 0) {
+                        <span class="new">${{ productsApi.priceWithDiscount(p.price, p.discount) }}</span>
+                        <span class="old">${{ p.price }}</span>
+                        } @else {
+                        <span class="new">${{ p.price }}</span>
+                        }
+                    </div>
                 </div>
             </article>
             }

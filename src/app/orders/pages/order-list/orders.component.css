@@ -72,9 +72,24 @@
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
 }
+
+.row {
+    background-color: #2196f3;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+/* 
+.head {
+    justify-items: center;
+    height: 130px;
+} */
 
 .title {
     grid-column: span 2 / span 2;
+    align-content: center;
+    justify-items: center;
+    height: 100px;
 }

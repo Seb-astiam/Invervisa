@@ -4,10 +4,11 @@ import { FormsModule } from "@angular/forms";
 import { Router, RouterLink } from "@angular/router";
 import { CartItem, CartService } from "../services/cart.service";
 import { ProductsService } from "../../products/services/products.service";
+// import { CheckoutComponent } from "../../orders/pages/checkout/checkout.component";
 
 @Component({
     selector: 'app-cart',
-    imports: [CommonModule, FormsModule, RouterLink],
+    imports: [CommonModule, FormsModule, RouterLink, ],
     templateUrl: './cart.component.html',
     styleUrl: './cart.component.css'
 })
@@ -89,4 +90,10 @@ export class CartComponent {
             error: () => { this.loading = true }
         })
     }
+
+    priceXItems(price: number, quantity: number ) {
+       return price * quantity
+    }
+
+   
 }

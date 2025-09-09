@@ -1,0 +1,54 @@
+<div class="container">
+    <header class="head">
+        <img src="/logo.svg" class="logo" />
+    </header>
+
+    <div class="body">
+        <h2>Iniciar sesión</h2>
+        <p>Ingresa con tu correo y contraseña</p>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <div class="field">
+                <input formControlName="email" placeholder="correo" />
+                @if (email?.errors?.['email']) {
+                <div class="error">Formato de correo inválido.</div>
+                }
+            </div>
+
+            <div class="field">
+
+                    <input formControlName="password" placeholder="contraseña"
+                        [type]="showPassword ? 'text' : 'password'" required />
+
+                    <button type="button" class="toggle" (click)="showPassword = !showPassword"
+                        aria-label="Mostrar u ocultar contraseña">
+
+                        @if (showPassword) {
+                            <img  src="on.svg" alt="Ocultar contraseña" class="blockeye" />
+                        } @else {
+                            <img  src="off.svg" alt="Mostrar contraseña" class="blockeye" /> 
+
+                        }
+                    </button>
+
+
+                @if (password?.errors?.['required']) {
+                <div class="error">contraseña incorrecta</div>
+                }
+
+            </div>
+            <div class="actions">
+                <button class="buttones btn" type="submit" [disabled]="form.invalid || loading">
+                    {{ loading ? 'Ingresando…' : 'Entrar' }}
+                </button>
+                <a routerLink="/auth/register">Registrate!</a>
+            </div>
+       
+        </form>
+
+    </div>
+
+
+
+
+
+</div>

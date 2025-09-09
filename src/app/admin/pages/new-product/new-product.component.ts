@@ -23,6 +23,7 @@ export class NewProductComponent {
     form = this.fb.group({
         name: ['', Validators.required],
         description: ['', Validators.required],
+        brand: ['', Validators.required],
         price: [0, [Validators.required, Validators.min(0)]],
         stock: [0, [Validators.required, Validators.min(0)]],
         categoryId: ['', Validators.required],

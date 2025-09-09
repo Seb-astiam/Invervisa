@@ -1,0 +1,35 @@
+<section class="carousel" (mouseenter)="pause()" (mouseleave)="resume()" tabindex="0" (keydown)="onKey($event)" aria-roledescription="carousel">
+    <div class="track" [style.transform]="transform()">
+      @for (s of slides; track s.imageUrl; let i = $index) {
+        <div class="slide" role="group" [attr.aria-label]="'Slide ' + (i+1) + ' de ' + slides.length">
+          @if (s.link) {
+            <a [href]="s.link" target="_blank" rel="noopener">
+              <img [src]="s.imageUrl" [alt]="s.alt || 'Publicidad'" />
+            </a>
+          } @else {
+            <img [src]="s.imageUrl" [alt]="s.alt || 'Publicidad'" />
+          }
+        </div>
+      }
+    </div>
+
+    @if (showArrows && slides.length > 1) {
+      <button class="nav prev" (click)="prev()" aria-label="Anterior">‹</button>
+      <button class="nav next" (click)="next()" aria-label="Siguiente">›</button>
+    }
+
+    @if (showDots && slides.length > 1) {
+      <div class="dots" role="tablist">
+        @for (s of slides; track s.imageUrl; let i = $index) {
+          <button
+            class="dot"
+            [class.active]="i === index()"
+            (click)="goTo(i)"
+            [attr.aria-selected]="i === index()"
+            role="tab"
+            [attr.aria-label]="'Ir a slide ' + (i+1)">
+          </button>
+        }
+      </div>
+    }
+  </section>

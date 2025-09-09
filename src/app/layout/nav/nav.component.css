@@ -1,54 +1,103 @@
-.nav {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: space-around;
-}
-
-.links, .auth {
-  display:flex; 
-  gap:.75rem; 
-}
-
-a {
-  position: relative;
-  text-decoration: none;
-  color: var(--color-buton); 
-  font-family: var(--main-font);
-  font-weight: 700;
-}
-
-a::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background-color: var(--color-buton);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-}
-
-a:hover::after {
-  transform: scaleX(1);
-}
-
-a:hover {
-    color: black;
-}
-
-button {
-  cursor: pointer;
-}
-
 .user { 
   opacity:.8; 
   font-family: var(--main-font);
-  color: var(--color-buton);
+  color: white;
+  background-color: var(--color-buton);
   font-weight: 700;
+  padding: 3px;
 }
+
+@media (min-width: 769px) {
+
+  .nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .links {
+    display:flex; 
+    align-items: center;
+    gap: 1rem; 
+  }
+  
+ 
+  
+  
+  a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: var(--color-buton);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  
+  a:hover::after {
+    transform: scaleX(1);
+  }
+  
+  a:hover {
+      color: black;
+  }
+  
+  .btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger svg rect {
+  fill: #333;
+}
+
+@media (max-width: 768px) {
+  .links, .auth {
+    display: none;
+    flex-direction: column;
+    gap: 1em;
+    position: absolute;
+    width: 80%;
+    top: 60px;
+    right: 0;
+    background: #fff;
+    padding: 1rem;
+    z-index: 1;
+    border-top: 1px solid #eee;
+  }
+
+  .links.open, .auth.open {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  a, .user {
+    font-size: 30px;
+  }
+  a {
+    border-bottom: #eee 1px solid;
+    padding-bottom: 3px;
+  }
+  
+}
+
 
 
 

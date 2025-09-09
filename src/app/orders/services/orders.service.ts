@@ -7,7 +7,9 @@ export interface OrderItem {
     productId: string;
     quantity: number;
     priceAtPurchase: number;
-    product?: { id: string; name: string; imageUrl?: string;  };
+    basePrice?: number; 
+    discountApplied?: number;  
+    product?: { id: string; name: string; imageUrl?: string; discount: number;  };
 }
 
 export interface Order {
@@ -44,5 +46,9 @@ export class OrdersService {
 
     updateStatus(id: string, status: Order['status']) {
         return this.http.patch(`${this.API}/${id}/status`, { status });
+    }
+
+    getOne(id: string) {
+        return this.http.get<Order>(`${this.API}/${id}`);
     }
 }
