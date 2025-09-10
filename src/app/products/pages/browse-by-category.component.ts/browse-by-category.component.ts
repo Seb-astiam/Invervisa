@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Category, CategoryService } from '../../../categories/services/categories.service';
 import { Product, ProductsService } from '../../services/products.service';
@@ -22,6 +22,27 @@ export class BrowseByCategoryComponent {
   categories = signal<(Category & { products?: Product[] })[]>([]);
   loading = signal(true);
   activeCategory = signal<string>('');
+  query = signal('');
+
+  private normalize = (s: string) =>
+    (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+  currentCategoryProducts = computed<Product[]>(() => {
+    const id = this.activeCategory();
+    const cat = this.categories().find(c => c.id === id);
+    return cat?.products ?? [];
+  });
+
+  filterProducts = (c: Category & { products?: Product[] }) => {
+    const q = this.normalize(this.query().trim());
+    if (!q) return c.products ?? [];
+    return (c.products ?? []).filter(p => this.normalize(p.name).includes(q));
+  };
+
+  onSearchInput(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.query.set(value);
+  }
 
   ngOnInit() {
     this.api.getAll().subscribe({
@@ -54,4 +75,6 @@ export class BrowseByCategoryComponent {
       error: e => alert('Error al agregar: ' + (e?.error?.message || ''))
     });
   }
+
+  
 }
