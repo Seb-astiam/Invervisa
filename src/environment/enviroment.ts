@@ -1,4 +1,6 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000', 
+
+  apiUrl: 'invervisa-back-production.up.railway.app', // URL base del backend en desarrollo
+
 };
