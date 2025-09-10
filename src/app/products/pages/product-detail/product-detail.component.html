@@ -48,13 +48,13 @@
             <div class="product-pricing">
                 @if (product.discount > 0) {
                 <div class="price-container">
-                    <span class="current-price">${{ api.priceWithDiscount(product.price, product.discount) }}</span>
-                    <span class="original-price">${{ product.price }}</span>
+                    <span class="current-price">{{ api.priceWithDiscount(product.price, product.discount) | currency:'COP':'symbol-narrow':'1.0-0'  }}</span>
+                    <span class="original-price">{{ product.price | currency:'COP':'symbol-narrow':'1.0-0'  }}</span>
                     <span class="discount-badge">-{{ product.discount }}%</span>
                 </div>
                 } @else {
                 <div class="price-container">
-                    <span class="current-price">${{ product.price }}</span>
+                    <span class="current-price">{{ product.price | currency:'COP':'symbol-narrow':'1.0-0'  }}</span>
                 </div>
                 }
             </div>

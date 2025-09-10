@@ -104,12 +104,12 @@ class="carousel"
                         <div class="product-pricing">
                             @if (p.discount > 0) {
                             <div class="price-container">
-                                <span class="current-price">${{ productsApi.priceWithDiscount(p.price, p.discount) }}</span>
-                                <span class="original-price">${{ p.price }}</span>
+                                <span class="current-price">{{ productsApi.priceWithDiscount(p.price, p.discount) | currency:'COP':'symbol-narrow':'1.0-0'  }}</span>
+                                <span class="original-price">{{ p.price | currency:'COP':'symbol-narrow':'1.0-0'  }}</span>
                                 <span class="discount-badge">-{{ p.discount }}%</span>
                             </div>
                             } @else {
-                            <span class="current-price">${{ p.price }}</span>
+                            <span class="current-price">{{ p.price | currency:'COP':'symbol-narrow':'1.0-0'  }}</span>
                             }
                         </div>
                         

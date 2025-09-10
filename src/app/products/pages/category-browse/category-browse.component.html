@@ -48,10 +48,10 @@
                     </div>
                     <div class="price">
                         @if (p.discount > 0) {
-                        <span class="new">${{ productsApi.priceWithDiscount(p.price, p.discount) }}</span>
-                        <span class="old">${{ p.price }}</span>
+                        <span class="new">{{ productsApi.priceWithDiscount(p.price, p.discount) | currency:'COP':'symbol-narrow':'1.0-0'  }}</span>
+                        <span class="old">{{ p.price | currency:'COP':'symbol-narrow':'1.0-0'  }}</span>
                         } @else {
-                        <span class="new">${{ p.price }}</span>
+                        <span class="new">{{ p.price | currency:'COP':'symbol-narrow':'1.0-0'  }}</span>
                         }
                     </div>
                 </div>
