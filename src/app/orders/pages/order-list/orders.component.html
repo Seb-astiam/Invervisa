@@ -1,0 +1,56 @@
+@if (!selectedOrder) {
+
+<section class="orders">
+    <a routerLink="/account">Volver</a>
+
+
+    <h1>Mis Pedidos</h1>
+    @if (loading) {
+    <h3>Cargando...</h3>
+    }
+
+
+    @if (!loading && !orders.length ) {
+    <h3>No tienes ordenes aun.</h3>
+    }
+    <table class="table">
+        <thead class="thead">
+            <tr class="rowhead">
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Estado
+                </th>
+                <th>
+                    Total
+                </th>
+                <th>
+                    Dirección
+                </th>
+            </tr>
+        </thead>
+        @for (o of orders; track o.id) {
+        <tbody class="tbody">
+            <tr>
+                <td>
+                    {{ o.createdAt | date: 'fullDate' }}
+                </td>
+                <td>
+                    <div [ngClass]="'estado ' + o.status.toLowerCase()">
+                        {{ o.status }}
+                    </div> <br />
+                    <a [routerLink]="['/orders/detail/', o.id]" class="link">Ver detalle</a>
+                </td>
+                <td>
+                    Total: ${{ o.totalPrice }}
+                </td>
+                <td>
+                    {{ o.address?.street }}, {{ o.address?.city }}
+                </td>
+            </tr>
+        </tbody>
+        }
+    </table>
+</section>
+}

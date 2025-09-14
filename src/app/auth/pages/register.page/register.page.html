@@ -1,0 +1,31 @@
+<div class="container">
+    <header class="head">
+        <img src="/logo.svg" class="logo" />
+    </header>
+
+
+    <div class="body">
+        <h2>Registrate como cliente</h2>
+        <p>
+            Registra tu correo y contraseña junto con tu nombre para conocerte más.
+        </p>
+        <form [formGroup]="form" (ngSubmit)="submit()">
+    
+            <div class="field">
+                <input formControlName="name" placeholder="nombre" />
+            </div>
+            <div class="field">
+                <input formControlName="email" placeholder="correo" />
+            </div>
+            <div class="field">
+                <input formControlName="password" placeholder="contraseña" />
+            </div>
+
+            <div class="actions">
+                <button type="submit" class="buttones btn">Registrar</button>
+                <a routerLink="/auth/login">Ya tienes cuenta?</a>
+            </div>
+        </form>
+    </div>
+   
+</div>

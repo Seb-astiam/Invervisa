@@ -1,0 +1,26 @@
+<h1>Editar perfil</h1>
+
+@if (loading) { <p>Cargando...</p> }
+
+@if(!loading) {
+<form [formGroup]="form" (ngSubmit)="save()" class="card">
+    <label>Nombre</label>
+    <input formControlName="name" />
+    @if (form.controls.name.invalid && form.controls.name.touched) {
+    <small class="error">Requerido</small>
+    }
+
+    <label>Email</label>
+    <input formControlName="email" />
+    @if (form.controls.email.invalid && form.controls.email.touched) {
+    <small class="error">Email inválido</small>
+    }
+
+    <button type="submit" [disabled]="form.invalid || saving">
+        {{ saving ? 'Guardando...' : 'Guardar cambios' }}
+    </button>
+    <a routerLink="/account">Volver</a>
+
+    @if (msg) { <p class="msg">{{ msg }}</p> }
+</form>
+}

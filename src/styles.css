@@ -1,0 +1,82 @@
+/* You can add global styles to this file, and also import other style files */
+
+.layout {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    min-height: max-content;
+}
+
+/* Tipografia */
+
+.istok-web-regular {
+    font-family: "Istok Web", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .istok-web-bold {
+    font-family: "Istok Web", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  /* Colores */
+:root{
+    --color-buton: #758F31; 
+    --color-text: #758F31;
+    --color-back: #F6F7F1;
+    --main-font: "Istok Web", sans-serif; 
+    --logo-font: "Philosopher", sans-serif;
+}
+
+.buttones {
+  background-color: var(--color-back);
+  font-family: var(--main-font);
+  font-weight: 700;
+  color: var(--color-text);
+  /* text-shadow: #000 1px 0px 1px; */
+  border: 0.5px solid var(--color-text);
+  width: max-content;
+  padding: 5px 8px;
+  border-radius: 10px;
+}
+
+.buttones:hover {
+  background-color: #758F31;
+  color: #F6F7F1;
+  cursor: pointer;
+  transition: 200ms;
+}
+
+a {
+  text-decoration: none;
+  font-family: var(--main-font);
+  font-weight: 700;
+  color: var(--color-text); 
+  display: flex;
+  align-items: center;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.icon-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;         
+  border: none;              
+  background-color: #F6F7F1;  
+  display: flex;             
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+}
+
+.back {
+  margin-top: 3px;
+}
+  

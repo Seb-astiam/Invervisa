@@ -1,0 +1,76 @@
+.container {
+    font-family: var(--main-font);
+    border-bottom: 1px  solid var(--color-text);
+    border-top: 1px  solid var(--color-text);
+    margin-top: 10px;
+}
+
+.return {
+    position: relative;
+    top: 10px;
+    left: 10px;
+    color: black;
+}
+
+.head {
+    display: flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:.5rem 0;
+}
+
+.status{padding:.25rem .5rem;border-radius:999px;border:1px solid #eee}
+    .status.pending{background:#fff7e6;border-color:#ffd591}
+    .status.paid{background:#f6ffed;border-color:#b7eb8f}
+    .status.shipped{background:#e6f7ff;border-color:#91d5ff}
+    .status.delivered{background:#f6ffed;border-color:#95de64}
+    .status.cancelled{background:#fff1f0;border-color:#ffa39e}
+
+.grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:1rem
+}
+
+.card{
+    border:1px solid var(--color-back);
+    border-radius:8px;
+    padding:1rem;
+    margin-bottom: 10px;
+}
+
+.items{
+    display:grid;
+    gap:.5rem;
+}
+
+.item{
+    display:grid;
+    grid-template-columns:1fr 30px 120px;
+    gap:.5rem;
+    align-items:center;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-weight: 700
+}
+
+.price {
+    text-align:right
+}
+
+.totals{
+    margin-top:1rem;
+    border-top:1px solid var(--color-back);
+    padding-top: 1rem
+}
+
+.totals .row{
+    display:flex;
+    justify-content:space-between;
+    margin:.25rem 0
+}
+

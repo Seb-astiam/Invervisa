@@ -1,0 +1,73 @@
+<div class="container">
+    <a routerLink="/orders" class="return">← Volver</a>
+
+    @if (loading()) { <p>Cargando orden...</p> }
+    @if (!loading() && !order()) { <p>No se encontró la orden.</p> }
+
+    @if (order()) {
+        <header class="head">
+            <div>
+                <h1>Orden #{{ order()?.id | slice:0:8 }}</h1>
+                <small>Creada: {{ order()?.createdAt | date:'short' }}</small>
+            </div>
+            <div class="status" [class]="order()?.status">
+                {{ order()?.status | titlecase }}
+            </div>
+        </header>
+
+        <section class="grid">
+            <div class="card">
+                <h3>Productos</h3>
+                <div class="items">
+                    @for (it of order()!.items; track it.id) {
+                    <div class="item">
+                        <div class="name">
+                            <img [src]="it.product?.imageUrl" style="height: 40px; width: 40px;" />
+                            <p>{{ it.product?.name }}</p>
+
+                        </div>
+                        <div class="qty">x{{ it.quantity }} <br/> @if(it.quantity !== 1) {=}</div>
+                        <div class="price">
+                            Unidad: {{ it.basePrice| currency:'COP':'symbol-narrow':'1.0-0' }}
+
+                            @if (it.discountApplied) {
+                                descuento: {{ it.discountApplied }}%
+
+                            }
+                        </div>
+                       
+                        
+                    </div>
+                    }
+                </div>
+                <div class="totals">
+                    <div class="row">
+                        <span>Subtotal</span>
+                        <strong>{{ subtotal() | currency:'COP':'symbol-narrow':'1.0-0' }}</strong>
+                    </div>
+                    <div class="row">
+                        <span>Total</span>
+                        <strong>{{ order()!.totalPrice | currency:'COP':'symbol-narrow':'1.0-0' }}</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>Envío</h3>
+                @if (order()?.address) {
+                <p>
+                    {{ order()!.address!.street }}<br />
+                    {{ order()!.address!.city }}, {{ order()!.address!.state }}<br />
+                    {{ order()!.address!.zipCode }}
+                </p>
+                } @else {
+                <p>Sin dirección asociada.</p>
+                }
+            </div>
+
+        </section>
+
+
+    }
+
+</div>
+

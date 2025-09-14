@@ -1,0 +1,21 @@
+<div class="container">
+    <header class="header">
+        <h2>Nueva categoría</h2>
+        <p class="subtitle">Crea una categoría para organizar tus productos.</p>
+    </header>
+
+
+    <form [formGroup]="form" (ngSubmit)="save()" class="form">
+        <label>Nombre categoria</label>
+        <input formControlName="name" placeholder="Cuidado personal"/>
+        <label>Descripción categoria</label>
+        <textarea id="description" rows="3" formControlName="description"
+            placeholder="Breve descripción de la categoría">
+        </textarea>
+
+        
+        <button class="btn" type="submit" [disabled]="form.invalid || loading">Guardar</button>
+        <a class="link" routerLink="/admin">Volver</a>
+    </form>
+    @if (msg) { <h3>{{ msg }}</h3> }
+</div>

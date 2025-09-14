@@ -1,0 +1,63 @@
+<div class="layout">
+    <aside class="sidebar">
+        <h3>Categorías</h3>
+        @if (loadingCats()) {
+        <p>Cargando categorías...</p>
+        }
+
+        @for (c of categories(); track c.id) {
+        <a (click)="selectCategory(c.id)" [class.active]="c.id === selectedId()">{{ c.name }}</a>
+        }
+    </aside>
+
+    <section class="content">
+        <header class="head">
+            <h1>{{ currentCategoryName() }}</h1>
+            @if (!loadingProds()) {
+            <p>{{ products().length }} productos encontrados</p>
+            }
+        </header>
+
+        @if (loadingProds()) { 
+        <div class="loading">
+            <p>Cargando productos...</p>
+        </div>
+        }
+        
+        @if (!loadingProds() && products().length === 0) {
+        <div class="empty-state">
+            <p>No hay productos en esta categoría.</p>
+        </div>
+        }
+        
+        @if (!loadingProds() && products().length > 0) {
+        <div class="grid">
+            @for (p of products(); track p.id) {
+            <article class="card">
+                @if (p.imageUrl) {
+                <img [src]="p.imageUrl" [alt]="p.name" />
+                } @else {
+                <div class="placeholder-image">
+                    <span>Sin imagen</span>
+                </div>
+                }
+
+                <div class="card-content">
+                    <div class="name">
+                        <a [routerLink]="['/productos', p.id]">{{ p.name }}</a>
+                    </div>
+                    <div class="price">
+                        @if (p.discount > 0) {
+                        <span class="new">{{ productsApi.priceWithDiscount(p.price, p.discount) | currency:'COP':'symbol-narrow':'1.0-0'  }}</span>
+                        <span class="old">{{ p.price | currency:'COP':'symbol-narrow':'1.0-0'  }}</span>
+                        } @else {
+                        <span class="new">{{ p.price | currency:'COP':'symbol-narrow':'1.0-0'  }}</span>
+                        }
+                    </div>
+                </div>
+            </article>
+            }
+        </div>
+        }
+    </section>
+</div>
